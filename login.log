@@ -1,0 +1,142 @@
+2026-04-22 18:13:23,722 - WARNING - Failed login attempt: User 'fdasgfa' from IP 127.0.0.1
+2026-04-22 18:13:54,292 - WARNING - Failed login attempt: User 'hgtw' from IP 127.0.0.1
+2026-04-22 18:14:11,068 - WARNING - Failed login attempt: User 'yte' from IP 127.0.0.1
+2026-04-23 00:19:58,742 - INFO - New user created: 'MrsBalkwill'
+2026-04-23 00:20:18,746 - INFO - Successful login attempt: User 'MrsBalkwill' from IP 127.0.0.1
+2026-04-23 00:37:56,641 - INFO - New user created: 'MrLeighton'
+2026-04-23 00:51:18,541 - INFO - Successful login attempt: User 'MrsBalkwill' from IP 127.0.0.1
+2026-04-23 00:52:04,697 - INFO - Successful login attempt: User 'MrsBalkwill' from IP 127.0.0.1
+2026-04-23 00:53:35,740 - INFO - Successful login attempt: User 'MrsBalkwill' from IP 127.0.0.1
+2026-04-23 00:57:09,690 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-23 00:57:54,285 - INFO - Successful login attempt: User 'MrsBalkwill' from IP 127.0.0.1
+2026-04-23 00:59:52,295 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-23 01:29:37,520 - INFO - New user created: 'MakkaPakka'
+2026-04-23 01:30:21,131 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-23 01:32:07,725 - WARNING - Failed login attempt: User 'fgrwafr' from IP 127.0.0.1
+2026-04-23 01:44:22,750 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-23 01:45:04,773 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-23 14:33:59,330 - INFO - Successful login attempt: User 'MrsBalkwill' from IP 127.0.0.1
+2026-04-23 14:55:55,209 - INFO - Successful login attempt: User 'MrsBalkwill' from IP 127.0.0.1
+2026-04-23 14:57:21,065 - INFO - Successful login attempt: User 'MrsBalkwill' from IP 127.0.0.1
+2026-04-23 14:58:39,338 - INFO - Successful login attempt: User 'MrsBalkwill' from IP 127.0.0.1
+2026-04-23 15:02:27,011 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-23 15:13:45,040 - INFO - Successful login attempt: User 'MrsBalkwill' from IP 127.0.0.1
+2026-04-23 16:36:35,307 - INFO - Successful login attempt: User 'MrsBalkwill' from IP 127.0.0.1
+2026-04-23 16:41:51,631 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-23 17:47:17,672 - INFO - Successful login attempt: User 'MrsBalkwill' from IP 127.0.0.1
+2026-04-23 18:21:13,838 - INFO - Successful login attempt: User 'MrsBalkwill' from IP 127.0.0.1
+2026-04-23 18:23:44,706 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-23 18:23:46,915 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-23 19:10:50,140 - INFO - Successful login attempt: User 'MrsBalkwill' from IP 127.0.0.1
+2026-04-23 19:25:35,818 - INFO - Successful login attempt: User 'MrsBalkwill' from IP 127.0.0.1
+2026-04-23 21:11:35,985 - INFO - New user created: 'William'
+2026-04-23 21:12:23,795 - INFO - Successful login attempt: User 'William' from IP 127.0.0.1
+2026-04-23 22:17:30,119 - INFO - Successful login attempt: User 'MrsBalkwill' from IP 127.0.0.1
+2026-04-23 23:01:10,727 - WARNING - Failed login attempt: User 'William' from IP 127.0.0.1
+2026-04-23 23:01:25,001 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-23 23:12:59,894 - INFO - Successful login attempt: User 'MrsBalkwill' from IP 127.0.0.1
+2026-04-23 23:21:49,210 - INFO - New user created: 'MrLeighton'
+2026-04-23 23:22:00,296 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-23 23:22:17,971 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-23 23:25:00,198 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-23 23:29:35,490 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-23 23:30:02,545 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-23 23:33:10,302 - WARNING - Failed login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-23 23:33:23,387 - INFO - New user created: 'MrLeighton'
+2026-04-23 23:33:29,706 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-23 23:36:27,545 - WARNING - Failed login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-23 23:36:32,714 - INFO - New user created: 'MrLeighton'
+2026-04-23 23:36:37,941 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-23 23:41:25,837 - INFO - New user created: 'MrLeighton'
+2026-04-23 23:41:30,271 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-23 23:44:43,288 - INFO - New user created: 'MrLeighton'
+2026-04-23 23:44:50,579 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-23 23:47:45,638 - INFO - New user created: 'MrLeighton'
+2026-04-23 23:47:50,081 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-23 23:51:21,596 - INFO - New user created: 'MrLeighton'
+2026-04-23 23:51:26,608 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-24 00:36:38,215 - WARNING - Failed login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-24 00:36:42,309 - WARNING - Failed login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-24 00:36:48,425 - INFO - New user created: 'MrLeighton'
+2026-04-24 00:36:53,434 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-24 02:05:11,666 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-24 02:07:06,673 - INFO - New user created: 'MrLeighton'
+2026-04-24 02:07:12,090 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-24 02:09:38,210 - INFO - New user created: 'MrLeighton'
+2026-04-24 02:09:43,737 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-24 02:13:37,883 - INFO - New user created: 'MrLeighton'
+2026-04-24 02:13:42,791 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-24 02:15:15,095 - INFO - New user created: 'MrLeighton'
+2026-04-24 02:15:19,443 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-24 02:23:16,708 - INFO - New user created: 'MrLeighton'
+2026-04-24 02:23:22,266 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-24 02:28:15,331 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-24 02:47:18,821 - INFO - New user created: 'MrLeighton'
+2026-04-24 02:47:23,876 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-24 11:47:57,914 - INFO - New user created: 'Miss Balkwill'
+2026-04-24 11:48:49,771 - INFO - Successful login attempt: User 'Miss Balkwill' from IP 127.0.0.1
+2026-04-24 13:42:18,768 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-24 17:18:34,979 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-24 18:09:33,313 - WARNING - Failed login attempt: User 'MrsBalkwill' from IP 127.0.0.1
+2026-04-24 18:09:38,779 - INFO - New user created: 'MrsBalkwill'
+2026-04-24 18:09:43,733 - INFO - Successful login attempt: User 'MrsBalkwill' from IP 127.0.0.1
+2026-04-24 18:11:05,796 - INFO - Successful login attempt: User 'MrsBalkwill' from IP 127.0.0.1
+2026-04-24 18:11:44,255 - INFO - Successful login attempt: User 'MrsBalkwill' from IP 127.0.0.1
+2026-04-24 18:24:42,142 - INFO - New user created: 'MrsBalkwill'
+2026-04-24 18:24:50,340 - WARNING - Failed login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-24 18:24:53,809 - INFO - Successful login attempt: User 'MrsBalkwill' from IP 127.0.0.1
+2026-04-24 18:25:52,131 - INFO - New user created: 'William'
+2026-04-24 18:25:59,632 - INFO - Successful login attempt: User 'William' from IP 127.0.0.1
+2026-04-24 18:39:23,204 - INFO - New user created: 'MrLeighton'
+2026-04-24 18:48:16,664 - INFO - New user created: 'MrLeighton'
+2026-04-24 18:48:26,992 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-24 18:49:09,785 - INFO - New user created: 'William'
+2026-04-24 18:49:16,736 - INFO - Successful login attempt: User 'William' from IP 127.0.0.1
+2026-04-24 19:33:05,239 - INFO - New user created: 'MrsBalkwill'
+2026-04-24 19:33:14,212 - INFO - Successful login attempt: User 'MrsBalkwill' from IP 127.0.0.1
+2026-04-24 19:52:06,106 - INFO - New user created: 'MrBalkwill'
+2026-04-24 19:52:30,109 - INFO - Successful login attempt: User 'MrBalkwill' from IP 127.0.0.1
+2026-04-24 22:03:42,174 - WARNING - Failed login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-24 22:03:51,364 - INFO - Successful login attempt: User 'MrBalkwill' from IP 127.0.0.1
+2026-04-24 22:05:50,829 - INFO - Successful login attempt: User 'MrBalkwill' from IP 127.0.0.1
+2026-04-24 22:08:43,164 - INFO - Successful login attempt: User 'MrBalkwill' from IP 127.0.0.1
+2026-04-24 22:13:41,542 - INFO - Successful login attempt: User 'MrBalkwill' from IP 127.0.0.1
+2026-04-24 22:15:33,152 - INFO - Successful login attempt: User 'MrBalkwill' from IP 127.0.0.1
+2026-04-24 22:34:29,119 - WARNING - Failed login attempt: User 'William' from IP 127.0.0.1
+2026-04-24 22:34:38,264 - INFO - New user created: 'William'
+2026-04-24 22:34:44,105 - INFO - Successful login attempt: User 'William' from IP 127.0.0.1
+2026-04-24 22:49:24,211 - INFO - Successful login attempt: User 'William' from IP 127.0.0.1
+2026-04-25 19:08:52,030 - INFO - New user created: 'Danai'
+2026-04-25 19:08:59,237 - INFO - Successful login attempt: User 'Danai' from IP 127.0.0.1
+2026-04-25 19:29:12,391 - INFO - Successful login attempt: User 'Danai' from IP 127.0.0.1
+2026-04-25 20:08:08,467 - INFO - Successful login attempt: User 'Danai' from IP 127.0.0.1
+2026-04-25 23:24:00,048 - INFO - Successful login attempt: User 'Danai' from IP 127.0.0.1
+2026-04-25 23:45:07,119 - INFO - New user created: 'Danai'
+2026-04-25 23:45:13,403 - INFO - Successful login attempt: User 'Danai' from IP 127.0.0.1
+2026-04-25 23:52:20,719 - INFO - New user created: 'Danai'
+2026-04-25 23:52:25,456 - INFO - Successful login attempt: User 'Danai' from IP 127.0.0.1
+2026-04-25 23:59:48,095 - INFO - New user created: 'MrLeighton'
+2026-04-25 23:59:53,090 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-26 00:02:59,258 - INFO - New user created: 'MrLeighton'
+2026-04-26 00:03:04,287 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-26 00:05:33,181 - INFO - New user created: 'MrLeighton'
+2026-04-26 00:05:40,988 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-26 00:09:15,729 - INFO - New user created: 'MrLeighton'
+2026-04-26 00:09:20,683 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-27 16:23:09,466 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-27 18:53:33,182 - INFO - New user created: 'MrLeighton'
+2026-04-27 18:53:38,529 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-27 19:17:32,345 - INFO - New user created: 'MrLeighton'
+2026-04-27 19:17:37,207 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-27 22:26:55,931 - INFO - New user created: 'smi'
+2026-04-27 22:27:10,355 - INFO - Successful login attempt: User 'smi' from IP 127.0.0.1
+2026-04-27 22:32:52,327 - WARNING - Failed login attempt: User '67' from IP 127.0.0.1
+2026-04-27 23:10:11,388 - WARNING - Failed login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-27 23:10:16,576 - INFO - New user created: 'MrLeighton'
+2026-04-27 23:10:21,591 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-28 00:05:23,966 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-28 00:14:53,954 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-28 00:18:07,680 - INFO - New user created: 'MrLeighton'
+2026-04-28 00:18:12,552 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-28 00:21:05,409 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-28 00:21:31,007 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1

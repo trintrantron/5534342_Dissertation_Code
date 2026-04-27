@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Quack</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 100px;
+            background-color: #dedeff;
+            min-height: 100vh;
+        }
+
+        .column {
+            float: left;
+            text-align: center;
+            place-items: center;
+            width: 32%;
+            padding: 10px;
+            margin-top: 50px;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+            text-align: center;
+        }
+
+        @media screen and (max-width: 600px) {
+            .column {
+                width: 100%;
+            }
+        }
+
+        form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        #finishButton {
+            height: 50px;
+        }
+
+        #studentInput {
+            height: 230px;
+        }
+
+        .banner {
+            width: 100%;
+            height: 100px;
+            background-color: #9391ff; 
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-bottom:  5px solid #000000;
+            z-index: 999;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 50px;
+            font-family: "Raleway", sans-serif;
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            font-family: "Raleway", sans-serif;
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .purple {
+            text-align: center;
+            font-size: 24px;
+            font-family: "Raleway", sans-serif;
+            color: #635dff;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .orange {
+            text-align: center;
+            font-size: 24px;
+            font-family: "Raleway", sans-serif;
+            color: #fc9432;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        
+        label {
+            text-align: center;
+            font-size: 14px;
+            font-family: inherit;
+            color: #ff0000;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        
+        a {
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 26px;
+            color: #9391ff;
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+            background-color: #9391ff;
+        }
+        
+        input,
+        button {
+            display: block;
+            margin: 20px 0;
+        }
+        
+        .inputClass {
+            width: 370px;
+            padding: 16px;
+            font-size: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-family: inherit;
+            margin: 1 auto;
+        }
+        
+        button {
+            width: 405px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: inherit;
+            align-items: center;
+            background-color: #9391ff;
+            color: #fff;
+            cursor: pointer;
+            margin: 0 auto;
+            font-weight: bold;
+            font-size: 22px;
+        }
+        
+        button:hover {
+            background-color: #fc9432;
+        }
+
+        .logout {
+            width: 160px;
+            height: 60px;
+            position: absolute;
+            right: 30px;
+            top: 20px;
+            background-color: #dedeff;
+            color: #000000;
+            font-size: 20px;
+            border: 5px solid #000000;
+        }
+        
+        #bannerText {
+            position: center;
+            height: 98px;
+        }
+
+        #bannerLogo {
+            height: 100px;
+            position: relative;
+            right: -5px;
+        }
+
+        .signupbutton:hover {
+            background-color: #fc9432;
+        }
+
+        #signupForm {
+            background-color: #fff;
+            padding: 30px;
+            height: 190px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin-bottom: 130px;
+        }
+
+        #logo {
+            width: 100%;
+        }
+
+        #littleGoose {
+            width: 15%;
+        }
+
+        a:hover {
+            scale: 1.02;
+        }
+
+        .noform {
+            width: 1px;
+            height: 1px;
+            background-color: #9391ff;
+            padding: 0px;
+            border-radius: 0px;
+        }
+
+        .options {
+            background-color: #9391ff;
+            padding: 30px;
+            border-radius: 10px;
+            align-self: center;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            text-align: center;
+            font-size: 50px;
+            font-family: "Raleway", sans-serif;
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        #delete {
+            width: 100px;
+        }
+
+        .grid {
+            color: #dedeff;
+            font-family: "Raleway", sans-serif;
+            font-weight: bold;
+            top: 250px;
+            left: 500px;
+        }
+
+        .noformstudent {
+            width: 1px;
+            height: 1px;
+            background-color: #9391ff;
+            padding: 0px;
+            border-radius: 0px;
+            display: inline-block;
+            margin-right: 50px;
+        }
+
+        .student {
+            display: inline-block;
+            margin-right: 50px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="banner">
+        <img id="bannerLogo" src="{{ url_for('static', filename='smallCyberQuackBannerNoBackground.svg') }}">
+        <h2>Welcome {{username}}!</h2>
+        <form class="noform" action="/logout" method ="POST">
+            <button class="logout" type="submit">Logout</button>
+        </form>
+    </div>
+
+    <div class="row">
+        <div class="column">
+            <img id="logo" src="{{ url_for('static', filename='goose.svg') }}">
+        </div>
+
+        <div class="column">
+            <div>
+                <form action="/manually_add_students" id="studentInput" method="post">
+                    <h2>Student Name:</h2>
+                    <form id="studentInput" action="/manually_add_students" method="post">
+                        <input class="inputClass" type="text" id="name" name="name" placeholder="Student name" required>
+                        <button type="submit">Add Student</button>
+                    </form>
+                    <label>{{message}}<label>                    
+                </form>
+                <form id="finishButton" action="/confirm_enter_students" method="post">
+                    <button type="submit">Finish</button>
+                </form>
+                </form>
+                    <div class="grid">
+                        {% for student in class_temp %}
+                            <div>
+                                <h2 class="student">{{student.name}}</h1>
+                                <form class="noformstudent" action="/delete_student" method="post">
+                                    <input class="hidden" name="studentName" value="{{student.name}}">
+                                    <button id="delete" type="submit">Delete</button>
+                                </form>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="column">
+            <img id="logo" src="{{ url_for('static', filename='goose.svg') }}">
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Quack</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 100px;
+            background-color: #dedeff;
+            min-height: 100vh;
+            align-items: center;
+            text-align: center;
+        }
+
+        .column {
+            float: left;
+            text-align: center;
+            place-items: center;
+            width: 32%;
+            padding: 10px;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+            text-align: center;
+        }
+
+        @media screen and (max-width: 600px) {
+            .column {
+                width: 100%;
+            }
+        }
+
+        form {
+            margin-top: 70px;
+            background-color: #fff;
+            padding-left: 40px;
+            padding-bottom: 40px;
+            padding-right: 40px;
+            padding-top: 1px;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        .banner {
+            width: 100%;
+            height: 100px;
+            background-color: #9391ff; 
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-bottom:  5px solid #000000;
+            z-index: 999;
+        }
+
+        h1 {
+            text-align: left;
+            font-size: 50px;
+            font-family: "Raleway", sans-serif;
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            text-align: left;
+            font-size: 24px;
+            font-family: "Raleway", sans-serif;
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        h3 {
+            text-align: center;
+            font-size: 24px;
+            font-family: "Raleway", sans-serif;
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        h4 {
+            text-align: left;
+            font-size: 40px;
+            font-family: "Raleway", sans-serif;
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        h5 {
+            text-align: left;
+            font-size: 20px;
+            font-family: "Raleway", sans-serif;
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .purple {
+            text-align: center;
+            font-size: 24px;
+            font-family: "Raleway", sans-serif;
+            color: #635dff;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .orange {
+            text-align: center;
+            font-size: 24px;
+            font-family: "Raleway", sans-serif;
+            color: #fc9432;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        
+        label {
+            text-align: center;
+            font-size: 14px;
+            font-family: inherit;
+            color: #ff0000;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        
+        a {
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            color: #262626;
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        input,
+        button {
+            display: block;
+            margin: 20px 0;
+        }
+        
+        input {
+            width: 370px;
+            padding: 16px;
+            font-size: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-family: inherit;
+            margin: 1 auto;
+        }
+        
+        button {
+            width: 405px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: inherit;
+            align-items: center;
+            background-color: #9391ff;
+            color: #fff;
+            cursor: pointer;
+            margin: 0 auto;
+            font-weight: bold;
+            font-size: 22px;
+        }
+        
+        button:hover {
+            background-color: #fc9432;
+        }
+        
+        #bannerText {
+            position: center;
+            height: 98px;
+        }
+
+        #bannerLogo {
+            height: 100px;
+            position: relative;
+            right: -5px;
+        }
+
+        .signupbutton {
+            width: 220px;
+            height: 70px;
+            padding: 15px;
+            align-items: center;
+            border-radius: 5px;
+            font-family: inherit;
+            align-items: center;
+            background-color: #9391ff;
+            color: #fff;
+            cursor: pointer;
+            margin: 0 auto;
+            font-family: "Raleway", sans-serif;
+            font-weight: bold;
+            font-size: 28px;
+        }
+
+        .signupbutton:hover {
+            background-color: #fc9432;
+        }
+
+        #signupForm {
+            background-color: #fff;
+            padding: 30px;
+            height: 190px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin-bottom: 130px;
+        }
+
+        #logo {
+            width: 100%;
+        }
+
+        #littleGoose {
+            width: 15%;
+        }
+
+        a:hover {
+            color: #9391ff;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="banner">
+        <img id="bannerLogo" src="{{ url_for('static', filename='trinTranTronLogoWithBorder.svg') }}">
+        <img id="bannerText" src="{{ url_for('static', filename='trinTranTronPresents.svg') }}">
+    </div>
+
+
+
+    <div class="row">
+        <div class="column">
+            <div>
+                <form action="/signup_confirm" method="post">
+                    <h1>Teacher signup</h1>
+                    <h2 for="username" >Username:</h2>
+                    <input type="text" id="username" placeholder="Username" name="username" required>
+
+                    <h2 for="password">Password:</h2>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+
+                    <h2 for="confirm_password">Confirm Password:</h2>
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm password" required>
+
+                    <form action="/signup_confirm" method ="post">
+                        <button id="create_user" type="submit">Create user</button>
+                    </form>
+
+                    <label class="errorlabel">{{message}}<label>
+                </form>
+                <a href="/">Return to login</a>
+                <h1>----------------------------</h1>
+                <h4>Password requirements:</h4>
+                <h5>- Password must be at least 8 characters long</h5>
+                <h5>- Password must contain a captial letter</h5>
+                <h5>- Password must contain a lower case letter</h5>
+                <h5>- Password must contain a number</h5>
+                <h5>- Password must contain a special character</h5>
+                <h1>----------------------------</h1>
+            </div>
+        </div>
+
+        <div class="column">
+            <h1>--------------------------------</h1>
+            <h1>How to use!</h1>
+            <img id="littleGoose" src="{{ url_for('static', filename='gooseImg.png') }}">
+            <h3>1.<span class="purple"> Create a class!</span> Make sure to choose a logical class name so you can identify each easily if you create more than one.</h3>
+            <h3>2.<span class="orange"> Enter the number of students in the class or enter the names of each member of your class.</span> We'll give them each a username and passoword for you to print and distribute!</h3>
+            <h3>3.<span class="purple"> Start a game with the class of your choice!</span> Once the class has been selected, students in your class who are logged in will show up so you can wait until everyone is logged on before anyone starts the challenges!</h3>
+            <h3>4.<span class="orange"> Display the leaderboard on the screen for the students or view it privately!</span> It will display the names you provided, or the autogenerated usernames if you did not manually input student names.</h3>
+            <h3>5.<span class="purple"> View or print the challenge solutions to help students if needed!</span> They will tell you the solution, how to get there and the lesson behind the excercise. </h3>
+            <h1>--------------------------------</h1>
+        </div>
+
+        <div class="column">
+            <img id="logo" src="{{ url_for('static', filename='haveAQuackAtIt.svg') }}">
+            <h1>--------------------------------</h1>
+            <h1>Our mission</h1>
+            <img id="littleGoose" src="{{ url_for('static', filename='gooseImg.png') }}">
+            <h3>We hope that your students enjoy our CTF challenges, and that this platform successfully introduces them to the basic Cyber Security concepts.</h3>
+            <h3>Our mission is to introduce Cyber Security to students in primary school so that they can seek out the oppourtunities that are in abundance at secondary school level, but often not know to or advertised by computer science departments.</h3>
+            <h3>We hope that this platform sparks interest in the Cyber Security leaders of the next generation, and gives them the confidence to seek out more oppourtunuities and enter more advanced CTF challenges as they grow.</h3>
+            <h1>--------------------------------</h1>
+        </div>
+    </div>
+
+</body>
+</html>
