@@ -19,6 +19,7 @@
             place-items: center;
             width: 32%;
             padding: 10px;
+            margin-top: 50px;
         }
 
         .row:after {
@@ -36,11 +37,18 @@
 
         form {
             background-color: #fff;
-            padding: none;
-            height: 350px;
+            padding: 30px;
             border-radius: 15px;
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
             width: 400px;
+        }
+
+        #finishButton {
+            height: 50px;
+        }
+
+        #studentInput {
+            height: 230px;
         }
 
         .banner {
@@ -109,6 +117,7 @@
             display: block;
             text-align: center;
             margin-top: 15px;
+            font-weight: bold;
         }
         
         input,
@@ -117,7 +126,7 @@
             margin: 20px 0;
         }
         
-        input {
+        .inputClass {
             width: 370px;
             padding: 16px;
             font-size: 20px;
@@ -169,23 +178,6 @@
             right: -5px;
         }
 
-        .signupbutton {
-            width: 220px;
-            height: 70px;
-            padding: 15px;
-            align-items: center;
-            border-radius: 5px;
-            font-family: inherit;
-            align-items: center;
-            background-color: #9391ff;
-            color: #fff;
-            cursor: pointer;
-            margin: 0 auto;
-            font-family: "Raleway", sans-serif;
-            font-weight: bold;
-            font-size: 28px;
-        }
-
         .signupbutton:hover {
             background-color: #fc9432;
         }
@@ -209,7 +201,8 @@
         }
 
         a:hover {
-            color: #9391ff;
+            scale: 1.1;
+            color: #fc9432;
         }
 
         .noform {
@@ -228,32 +221,6 @@
             box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
         }
 
-        .options:hover {
-            scale: 1.05;
-        }
-
-        #buttonSticker {
-            width: 350px;
-        }
-
-        .buttonTitle {
-            text-align: center;
-            font-size: 40px;
-            font-family: "Raleway", sans-serif;
-            color: #ffffff;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .buttonDescription {
-            text-align: center;
-            font-size: 20px;
-            font-family: "Raleway", sans-serif;
-            color: #000000;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
         .title {
             text-align: center;
             font-size: 50px;
@@ -261,6 +228,39 @@
             color: #000000;
             font-weight: bold;
             margin-bottom: 20px;
+        }
+
+        #startGame {
+            width: 180px;
+            height: 50px;
+            margin-right: 200px;
+            padding: 7px;
+        }
+
+        .grid {
+            color: #dedeff;
+            font-family: "Raleway", sans-serif;
+            font-weight: bold;
+            top: 250px;
+        }
+
+        .noformstudent {
+            width: 1px;
+            height: 1px;
+            background-color: #9391ff;
+            padding: 0px;
+            border-radius: 0px;
+            display: inline-block;
+            margin-right: 50px;
+        }
+
+        .class {
+            display: inline-block;
+            margin-right: 50px;
+        }
+
+        .hidden {
+            display: none;
         }
 
     </style>
@@ -273,6 +273,31 @@
         <form class="noform" action="/logout" method ="POST">
             <button class="logout" type="submit">Logout</button>
         </form>
+    </div>
+
+    <div class="row">
+        <div class="column">
+            <img id="logo" src="{{ url_for('static', filename='goose.svg') }}">
+        </div>
+
+        <div class="column">
+            <h1>Your classes:</h1>
+            <div class="grid">
+                {% for class in class_temp %}
+                    <div>
+                        <h2 class="class">{{class.class_name}}</h1>
+                        <form class="noformstudent" action="/starting_game" method="post">
+                            <input class="hidden" name="classID" value="{{class.class_id}}">
+                            <button id="startGame" type="submit">Start game!</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+            <br><a href="/teacher_homepage">Back to dashboard</a>
+        </div>
+        <div class="column">
+            <img id="logo" src="{{ url_for('static', filename='goose.svg') }}">
+        </div>
     </div>
 
 </body>

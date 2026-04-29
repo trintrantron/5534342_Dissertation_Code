@@ -112,13 +112,12 @@
         a {
             text-decoration: none;
             font-family: Arial, sans-serif;
-            font-size: 26px;
-            color: #9391ff;
+            font-size: 18px;
+            color: #262626;
             display: block;
             text-align: center;
             margin-top: 15px;
             font-weight: bold;
-            background-color: #9391ff;
         }
         
         input,
@@ -202,7 +201,8 @@
         }
 
         a:hover {
-            scale: 1.02;
+            scale: 1.1;
+            color: #fc9432;
         }
 
         .noform {
@@ -232,6 +232,9 @@
 
         #delete {
             width: 100px;
+            height: 40px;
+            margin-right: 200px;
+            padding: 7px;
         }
 
         .grid {
@@ -239,7 +242,6 @@
             font-family: "Raleway", sans-serif;
             font-weight: bold;
             top: 250px;
-            left: 500px;
         }
 
         .noformstudent {
@@ -285,16 +287,17 @@
                     <div>
                         <h2 class="class">{{class.class_name}}</h1>
                         <form class="noformstudent" action="/edit_class" method="post">
-                            <input class="hidden" name="className" value="{{class.class_name}}">
+                            <input class="hidden" name="classID" value="{{class.class_id}}">
                             <button id="delete" type="submit">Edit</button>
-                        </form>
+                        </form>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                         <form class="noformstudent" action="/delete_class" method="post">
-                            <input class="hidden" name="className" value="{{class.class_name}}">
+                            <input class="hidden" name="classID" value="{{class.class_id}}">
                             <button id="delete" type="submit">Delete</button>
                         </form>
                     </div>
                 {% endfor %}
             </div>
+            <br><a href="/teacher_homepage">Back to dashboard</a>
         </div>
         <div class="column">
             <img id="logo" src="{{ url_for('static', filename='goose.svg') }}">

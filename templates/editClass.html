@@ -280,9 +280,10 @@
 
         <div class="column">
             <div>
-                <form action="/manually_add_students" id="studentInput" method="post">
+                <form action="/manually_add_students_1" id="studentInput" method="post">
                     <h2>Student Name:</h2>
-                    <form class="studentInput" action="/manually_add_students" method="post">
+                    <form class="studentInput" action="/manually_add_students_1" method="post">
+                        <input class="hidden" name="class_id" value="{{class_id}}">
                         <input class="inputClass" type="text" id="name" name="name" placeholder="Student name" required>
                         <button type="submit">Add Student</button>
                     </form>
@@ -293,15 +294,15 @@
                         {% for student in class_temp %}
                             <div>
                                 <h2 class="student">{{student.name}}</h1>
-                                <form class="noformstudent" action="/delete_student" method="post">
+                                <form class="noformstudent" action="/delete_student_edit" method="post">
                                     <input class="hidden" name="studentName" value="{{student.name}}">
                                     <button id="delete" type="submit">Delete</button>
                                 </form>
                             </div>
                         {% endfor %}
                     </div>
-                </form>
-                <form id="finishButton" action="/confirm_enter_students" method="post">
+                </form><br><br><br><br>
+                <form id="finishButton" action="/confirm_enter_students_1" method="post">
                     <button type="submit">Finish</button>
                 </form>
             </div>

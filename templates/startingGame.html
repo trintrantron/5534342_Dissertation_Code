@@ -280,29 +280,18 @@
 
         <div class="column">
             <div>
-                <form action="/manually_add_students" id="studentInput" method="post">
-                    <h2>Student Name:</h2>
-                    <form class="studentInput" action="/manually_add_students" method="post">
-                        <input class="inputClass" type="text" id="name" name="name" placeholder="Student name" required>
-                        <button type="submit">Add Student</button>
-                    </form>
-                    <label>{{message}}<label>                    
                 </form>
-                </form>
+                    <h1>Your classes:</h1>
                     <div class="grid">
                         {% for student in class_temp %}
                             <div>
                                 <h2 class="student">{{student.name}}</h1>
-                                <form class="noformstudent" action="/delete_student" method="post">
-                                    <input class="hidden" name="studentName" value="{{student.name}}">
-                                    <button id="delete" type="submit">Delete</button>
-                                </form>
                             </div>
                         {% endfor %}
                     </div>
-                </form>
-                <form id="finishButton" action="/confirm_enter_students" method="post">
-                    <button type="submit">Finish</button>
+                </form><br><br><br><br>
+                <form id="finishButton" action="/play" method="post">
+                    <button type="submit">Start!</button>
                 </form>
             </div>
         </div>

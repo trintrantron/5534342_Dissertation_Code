@@ -110,9 +110,9 @@ def login():
         session["user_id"] = user.user_id
         session["logged_in"] = True
         if user.user_type == "t":
-            app.logger.info(f"Successful login attempt: User '{username}' from IP {request.remote_addr}")
+            app.logger.info(f"Successful teacher login attempt: User '{username}' from IP {request.remote_addr}")
             return redirect('/teacher_homepage') 
-        app.logger.info(f"Successful login attempt: User '{username}' from IP {request.remote_addr}")
+        app.logger.info(f"Successful student login attempt: User '{username}' from IP {request.remote_addr}")
         return redirect('/student_homepage') 
     else:
         app.logger.warning(f"Failed login attempt: User '{username}' from IP {request.remote_addr}")
@@ -320,30 +320,129 @@ def view_classes():
     else:
         return redirect("/")
     
+@app.route('/edit_class', methods=['GET', 'POST'])
+def edit_class():
+    if not("message" in session):
+        message = ""
+    else:
+        message = session["message"]
+    if "message" in session:
+        session.pop("message")
+    class_id = request.form.get('classID')
+    session["class_id"] = class_id
+    class_temp = Task.temp_students(class_id)
+    if session.get("logged_in") == True:
+        if(access.grant_access(session["username"], "enter_names")):
+            username = session["username"]
+            return render_template('editClass.html', username=username, message=message, class_temp=class_temp, class_id=class_id)
+        else:
+            return redirect("/")
+    else:
+        return redirect("/")
 
+@app.route('/edit_class_repeat', methods=['GET', 'POST'])
+def edit_class_repeat():
+    if not("message" in session):
+        message = ""
+    else:
+        message = session["message"]
+    if "message" in session:
+        session.pop("message")
+    class_id = request.form.get('classID')
+    class_id = session["class_id"]
+    class_temp = Task.temp_students(class_id)
+    if session.get("logged_in") == True:
+        if(access.grant_access(session["username"], "enter_names")):
+            username = session["username"]
+            return render_template('editClass.html', username=username, message=message, class_temp=class_temp, class_id=class_id)
+        else:
+            return redirect("/")
+    else:
+        return redirect("/")
 
+@app.route('/manually_add_students_1', methods=['GET', 'POST'])
+def manually_add_students_1():
+    if session.get("logged_in") == True:
+        name = request.form.get('name')
+        class_id = session["class_id"]
+        class_temp = Task.temp_students(class_id)
+        attempt = Task.add_named_students(name, class_id, class_temp)
+        if attempt[0] == True:
+            return redirect("/edit_class_repeat")
+        else:
+            session["message"] = attempt[1]
+            return redirect("/edit_class_repeat")
+    else:
+        return redirect("/")
 
+@app.route('/confirm_enter_students_1', methods=['GET', 'POST'])
+def confirm_enter_students_1():
+    if session.get("logged_in") == True:
+        if(access.grant_access(session["username"], "enter_names_success")):
+            return redirect("/view_classes")
+        else:
+            return redirect("/")
+    else:
+        return redirect("/")
 
+@app.route('/delete_student_edit', methods=['GET', 'POST'])
+def delete_student_edit():
+    if session.get("logged_in") == True:
+        name = request.form.get('studentName')
+        class_id = session["class_id"]
+        temp_class = Task.temp_students(class_id)
+        attempt = Task.delete_student(name, temp_class) 
+        if attempt[0] == True:
+            return redirect("/edit_class_repeat")
+        else:
+            session["message"] = attempt[1]
+            return redirect("/edit_class_repeat")
+    else:
+        return redirect("/")
 
-
-
-
-
-
-
-
-
+@app.route('/delete_class', methods=['GET', 'POST'])
+def delete_class():
+    if session.get("logged_in") == True:
+        class_id = request.form.get('classID')
+        Task.delete_class(class_id) 
+        return redirect("/view_classes")
+    else:
+        return redirect("/")
     
 @app.route('/start_game', methods=['GET', 'POST']) # unfinished!!!
 def start_game():
     if session.get("logged_in") == True:
         if(access.grant_access(session["username"], "create_class")):
             username = session["username"]
-            return render_template('startGame.html', username=username)
+            class_temp = Task.get_classes(username)
+            return render_template('startGame.html', username=username, class_temp=class_temp)
         else:
             return redirect("/")
     else:
         return redirect("/")
+
+@app.route('/starting_game', methods=['GET', 'POST']) # unfinished!!!
+def starting_game():
+    if session.get("logged_in") == True:
+        if(access.grant_access(session["username"], "create_class")):
+            username = session["username"]
+            class_id = request.form.get('classID')
+            return render_template('startingGame.html', username=username, class_id=class_id)
+        else:
+            return redirect("/")
+    else:
+        return redirect("/")
+
+
+
+
+
+
+
+
+
+
+
 
 @app.route('/student_homepage', methods=['GET', 'POST']) # unfinished!!!
 def user_homepage():

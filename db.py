@@ -326,6 +326,12 @@ class Task:
         print(temp_classes)
         return temp_classes
     
+    def delete_class(class_id):
+        this_class = session.query(db.Classes).filter(db.Classes.class_id==class_id).one()
+        session.delete(this_class)
+        session.commit()
+
+
 
 
 

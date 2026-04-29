@@ -140,3 +140,12 @@
 2026-04-28 00:18:12,552 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
 2026-04-28 00:21:05,409 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
 2026-04-28 00:21:31,007 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-28 19:33:53,840 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-28 19:38:30,957 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-29 17:02:19,868 - WARNING - Failed login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-29 17:02:31,835 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-29 20:28:53,487 - INFO - New user created: 'MrLeighton'
+2026-04-29 20:28:59,189 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-29 20:32:20,022 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-04-29 20:38:48,455 - INFO - New user created: 'MrLeighton'
+2026-04-29 20:38:52,733 - INFO - Successful login attempt: User 'MrLeighton' from IP 127.0.0.1
