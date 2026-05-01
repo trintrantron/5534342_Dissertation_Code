@@ -89,17 +89,18 @@ class db:
             self.salt = salt
             self.class_id = class_id
             self.score = 0
+            self.in_game = False
             self.user_type = "s"
 
         __tablename__ = "Students"   
 
         user_id = Column("User ID", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'), primary_key = True)
         name = Column("Name",StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
-        username = Column("Username",StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
         password = Column("Password", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
         salt = Column("Salt", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
         class_id = Column("Class ID", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
         score = Column("Score", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
+        in_game = Column("In Game", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
         user_type = Column("User Type", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -208,7 +209,7 @@ class Task:
             return(user)
         except NoResultFound as e:
             try:
-                user = session.query(db.Students).filter(db.Students.username==username).one()
+                user = session.query(db.Students).filter(db.Students.user_id==username).one()
                 return(user)
             except NoResultFound as e:
                 return(0)

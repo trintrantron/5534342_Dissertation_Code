@@ -281,12 +281,32 @@
 
         <div class="column">
             <div>
-                </form>
-                    <h1>Students in game:</h1>
-                    <ul id="players"></ul>
-                </form><br><br><br><br>
+
+                <h1>Leaderboard:</h1>
+                <ul id="players"></ul>
+
+                <script>
+                const socket = io();
+                const classId = "{{ class_id }}";
+                const username = "{{username}}"
+
+                socket.emit("join_class");
+
+                socket.on("user_list", function(users) {
+                    const list = document.getElementById("players");
+                    list.innerHTML = "";
+
+                    users.forEach(user => {
+                        if (user.username !== username) {
+                            const li = document.createElement("li");
+                            li.textContent = user.username;
+                            list.appendChild(li);
+                        }
+                    });
+                });
+                </script>
                 <form id="finishButton" method="post">
-                    <button onclick="startGame()" type="button">Start game!</button>
+                    <button onclick="endGame()" type="button">End game!</button>
                 </form>
             </div>
         </div>
@@ -294,32 +314,5 @@
             <img id="logo" src="{{ url_for('static', filename='goose.svg') }}">
         </div>
     </div>
-    <script>
-        const socket = io();
-
-        function startGame() 
-        {
-            socket.emit("start_game");
-            window.location.href = "/leaderboard";
-        }
-
-        const classId = "{{ class_id }}";
-        const username = "{{username}}"
-
-        socket.emit("join_class");
-
-        socket.on("user_list", function(users) {
-            const list = document.getElementById("players");
-            list.innerHTML = "";
-
-            users.forEach(user => {
-                if (user.username !== username) {
-                    const li = document.createElement("li");
-                    li.textContent = user.name;
-                    list.appendChild(li);
-                }
-            });
-        });
-    </script>
 </body>
 </html>

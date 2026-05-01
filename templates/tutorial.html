@@ -113,13 +113,12 @@
         a {
             text-decoration: none;
             font-family: Arial, sans-serif;
-            font-size: 26px;
-            color: #9391ff;
+            font-size: 18px;
+            color: #262626;
             display: block;
             text-align: center;
             margin-top: 15px;
             font-weight: bold;
-            background-color: #9391ff;
         }
         
         input,
@@ -204,6 +203,7 @@
 
         a:hover {
             scale: 1.02;
+            color: #9391ff;
         }
 
         .noform {
@@ -282,11 +282,7 @@
         <div class="column">
             <div>
                 </form>
-                    <h1>Students in game:</h1>
-                    <ul id="players"></ul>
-                </form><br><br><br><br>
-                <form id="finishButton" method="post">
-                    <button onclick="startGame()" type="button">Start game!</button>
+                    <h1>Yay tutorial here!!!</h1>
                 </form>
             </div>
         </div>
@@ -294,32 +290,5 @@
             <img id="logo" src="{{ url_for('static', filename='goose.svg') }}">
         </div>
     </div>
-    <script>
-        const socket = io();
-
-        function startGame() 
-        {
-            socket.emit("start_game");
-            window.location.href = "/leaderboard";
-        }
-
-        const classId = "{{ class_id }}";
-        const username = "{{username}}"
-
-        socket.emit("join_class");
-
-        socket.on("user_list", function(users) {
-            const list = document.getElementById("players");
-            list.innerHTML = "";
-
-            users.forEach(user => {
-                if (user.username !== username) {
-                    const li = document.createElement("li");
-                    li.textContent = user.name;
-                    list.appendChild(li);
-                }
-            });
-        });
-    </script>
 </body>
 </html>

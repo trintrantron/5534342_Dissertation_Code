@@ -3,6 +3,17 @@
 
 <head>
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script>
+        const socket = io();
+
+        socket.on("connect", function () {
+        socket.emit("join_class");
+        });
+
+        socket.on("start_game", function () {
+        window.location.href = "/tutorial";
+        });
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cyber Quack</title>
@@ -20,7 +31,6 @@
             place-items: center;
             width: 32%;
             padding: 10px;
-            margin-top: 50px;
         }
 
         .row:after {
@@ -38,18 +48,11 @@
 
         form {
             background-color: #fff;
-            padding: 30px;
+            padding: none;
+            height: 350px;
             border-radius: 15px;
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
             width: 400px;
-        }
-
-        #finishButton {
-            height: 50px;
-        }
-
-        .studentInput {
-            height: 230px;
         }
 
         .banner {
@@ -62,15 +65,6 @@
             left: 0;
             border-bottom:  5px solid #000000;
             z-index: 999;
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 50px;
-            font-family: "Raleway", sans-serif;
-            color: #000000;
-            font-weight: bold;
-            margin-bottom: 30px;
         }
         
         h2 {
@@ -100,35 +94,13 @@
             margin-bottom: 30px;
         }
         
-        label {
-            text-align: center;
-            font-size: 14px;
-            font-family: inherit;
-            color: #ff0000;
-            font-weight: bold;
-            display: block;
-            margin-top: 10px;
-        }
-        
-        a {
-            text-decoration: none;
-            font-family: Arial, sans-serif;
-            font-size: 26px;
-            color: #9391ff;
-            display: block;
-            text-align: center;
-            margin-top: 15px;
-            font-weight: bold;
-            background-color: #9391ff;
-        }
-        
         input,
         button {
             display: block;
             margin: 20px 0;
         }
         
-        .inputClass {
+        input {
             width: 370px;
             padding: 16px;
             font-size: 20px;
@@ -180,32 +152,6 @@
             right: -5px;
         }
 
-        .signupbutton:hover {
-            background-color: #fc9432;
-        }
-
-        #signupForm {
-            background-color: #fff;
-            padding: 30px;
-            height: 190px;
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            margin-bottom: 130px;
-        }
-
-        #logo {
-            width: 100%;
-        }
-
-        #littleGoose {
-            width: 15%;
-        }
-
-        a:hover {
-            scale: 1.02;
-        }
-
         .noform {
             width: 1px;
             height: 1px;
@@ -222,6 +168,32 @@
             box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
         }
 
+        .options:hover {
+            scale: 1.05;
+        }
+
+        #buttonSticker {
+            width: 350px;
+        }
+
+        .buttonTitle {
+            text-align: center;
+            font-size: 40px;
+            font-family: "Raleway", sans-serif;
+            color: #ffffff;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .buttonDescription {
+            text-align: center;
+            font-size: 20px;
+            font-family: "Raleway", sans-serif;
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
         .title {
             text-align: center;
             font-size: 50px;
@@ -229,37 +201,6 @@
             color: #000000;
             font-weight: bold;
             margin-bottom: 20px;
-        }
-
-        #delete {
-            width: 100px;
-        }
-
-        .grid {
-            color: #dedeff;
-            font-family: "Raleway", sans-serif;
-            font-weight: bold;
-            top: 250px;
-            left: 500px;
-        }
-
-        .noformstudent {
-            width: 1px;
-            height: 1px;
-            background-color: #9391ff;
-            padding: 0px;
-            border-radius: 0px;
-            display: inline-block;
-            margin-right: 50px;
-        }
-
-        .student {
-            display: inline-block;
-            margin-right: 50px;
-        }
-
-        .hidden {
-            display: none;
         }
 
     </style>
@@ -273,53 +214,7 @@
             <button class="logout" type="submit">Logout</button>
         </form>
     </div>
-
-    <div class="row">
-        <div class="column">
-            <img id="logo" src="{{ url_for('static', filename='goose.svg') }}">
-        </div>
-
-        <div class="column">
-            <div>
-                </form>
-                    <h1>Students in game:</h1>
-                    <ul id="players"></ul>
-                </form><br><br><br><br>
-                <form id="finishButton" method="post">
-                    <button onclick="startGame()" type="button">Start game!</button>
-                </form>
-            </div>
-        </div>
-        <div class="column">
-            <img id="logo" src="{{ url_for('static', filename='goose.svg') }}">
-        </div>
-    </div>
-    <script>
-        const socket = io();
-
-        function startGame() 
-        {
-            socket.emit("start_game");
-            window.location.href = "/leaderboard";
-        }
-
-        const classId = "{{ class_id }}";
-        const username = "{{username}}"
-
-        socket.emit("join_class");
-
-        socket.on("user_list", function(users) {
-            const list = document.getElementById("players");
-            list.innerHTML = "";
-
-            users.forEach(user => {
-                if (user.username !== username) {
-                    const li = document.createElement("li");
-                    li.textContent = user.name;
-                    list.appendChild(li);
-                }
-            });
-        });
-    </script>
+    <div class="title">Waiting for game to start...</div><br>
+    <h2>Are you ready?!</h2>
 </body>
 </html>

@@ -5,12 +5,15 @@
 # </form>
 
 from flask import Flask, render_template, request, redirect, url_for, session
+from flask_socketio import SocketIO, emit, join_room
 from db import Task
 import logging
 
 from logging.handlers import RotatingFileHandler
 
 app = Flask(__name__)
+socketio = SocketIO(app)
+rooms = {}
 
 ###################################################################################################################
 # Logger
@@ -66,7 +69,7 @@ class RBACSystem:
 ###################################################################################################################
 
 access = RBACSystem()
-access.add_resource("student_homepage", "t")
+access.add_resource("student_homepage", "s")
 
 access.add_resource("teacher_homepage", "t")
 access.add_resource("create_class", "t")
@@ -106,12 +109,14 @@ def login():
     attempt = Task.login(username, password)
     if attempt[0] == True:
         user = Task.user_exists(username)
-        session["username"] = user.username
         session["user_id"] = user.user_id
         session["logged_in"] = True
         if user.user_type == "t":
+            session["username"] = user.username
             app.logger.info(f"Successful teacher login attempt: User '{username}' from IP {request.remote_addr}")
             return redirect('/teacher_homepage') 
+        session["class_id"] = user.class_id
+        session["name"] = user.name
         app.logger.info(f"Successful student login attempt: User '{username}' from IP {request.remote_addr}")
         return redirect('/student_homepage') 
     else:
@@ -421,39 +426,143 @@ def start_game():
     else:
         return redirect("/")
 
-@app.route('/starting_game', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/starting_game', methods=['GET', 'POST']) # THIS NEEDS A LIST OF STUDENTS IN THE ROOM!!! AND NEEDS TO UPDATE PERIODICALLY, AND SHOW NUMBER OF STUDENTS IN ROOM
 def starting_game():
     if session.get("logged_in") == True:
         if(access.grant_access(session["username"], "create_class")):
             username = session["username"]
             class_id = request.form.get('classID')
+            session["class_id"] = class_id
             return render_template('startingGame.html', username=username, class_id=class_id)
         else:
             return redirect("/")
     else:
         return redirect("/")
 
-
-
-
-
-
-
-
-
-
-
-
-@app.route('/student_homepage', methods=['GET', 'POST']) # unfinished!!!
-def user_homepage():
+@app.route('/leaderboard', methods=['GET', 'POST']) # THIS NEEDS THE CURRENT STUDENTS IN THE ROOM TO BE ORDERED, AND NEEDS TO UPDATE PERIODICALLY 
+def leaderboard():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["username"], "user_homepage")):
+        if(access.grant_access(session["username"], "create_class")):
             username = session["username"]
-            return render_template('userhomepage.html', username=username)
+            class_id = session["class_id"]
+            return render_template('leaderboard.html', username=username, class_id=class_id)
         else:
             return redirect("/")
     else:
         return redirect("/")
+    
+@app.route('/results', methods=['GET', 'POST']) # THIS NEEDS 
+def results():
+    if session.get("logged_in") == True:
+        if(access.grant_access(session["username"], "create_class")):
+            username = session["username"]
+            class_id = session["class_id"]
+            return render_template('results.html', username=username, class_id=class_id)
+        else:
+            return redirect("/")
+    else:
+        return redirect("/")
+
+@socketio.on("start_game")
+def start_game():
+    class_id = session["class_id"]
+    socketio.emit("begin_game", room=class_id)
+
+@socketio.on("end_game")
+def end_game():
+    class_id = session["class_id"]
+    socketio.emit("game_over", room=class_id)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@socketio.on("join_class")
+def handle_join():
+    print("\n\nCLASS IS BEING JOINED BY ", session["username"], session["class_id"],"\n\n")
+    print("\n\nOR BEING JOINED BY ", session["name"], session["class_id"],"\n\n")
+    class_id = session["class_id"]
+    name = session["name"]
+    join_room(class_id)
+
+    if class_id not in rooms:
+        rooms[class_id] = []
+
+    rooms[class_id].append({
+        "sid": request.sid,
+        "name": name
+        })
+    
+    emit("user_list", rooms[class_id], room=class_id)
+
+@socketio.on("disconnect")
+def disconnect():
+    for class_id in rooms:
+        rooms[class_id] = [
+            user for user in rooms[class_id]
+            if user["sid"] != request.sid
+        ]
+
+        emit("user_list", rooms[class_id], room=class_id)
+
+@app.route('/student_homepage', methods=['GET', 'POST']) # unfinished!!!
+def student_homepage():
+    if session.get("logged_in") == True:
+        if(access.grant_access(session["user_id"], "student_homepage")):
+            username = session["name"]
+            class_id = session["class_id"]
+            return render_template('studentHomepage.html', username=username, class_id=class_id)
+        else:
+            return redirect("/")
+    else:
+        return redirect("/")
+    
+@app.route('/tutorial', methods=['GET', 'POST']) # unfinished!!!
+def tutorial():
+    if session.get("logged_in") == True:
+        if(access.grant_access(session["user_id"], "student_homepage")):
+            username = session["name"]
+            class_id = session["class_id"]
+            return render_template('tutorial.html', username=username, class_id=class_id)
+        else:
+            return redirect("/")
+    else:
+        return redirect("/")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @app.route('/logout', methods=['POST']) 
 def logout():
@@ -467,4 +576,4 @@ def logout():
         return redirect("/")
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8080)
+    socketio.run(app, debug=True, port=8080)
