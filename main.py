@@ -42,6 +42,7 @@ terminalLog.setLevel(logging.DEBUG)
 f = open("session_key", "r")
 app.secret_key = f.readline()
 f.close()
+app.config['SESSION_COOKIE_SECURE'] = True
 
 class Resource:
     def __init__(self, name, role):
