@@ -1476,4 +1476,4 @@ def logout_student():
         return redirect("/")
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True, port=8080, use_reloader=False)
+    socketio.run(app, debug=True, port=8080, use_reloader=False, allow_unsafe_werkzeug=True)
