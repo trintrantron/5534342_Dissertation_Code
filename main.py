@@ -42,7 +42,6 @@ terminalLog.setLevel(logging.DEBUG)
 f = open("session_key", "r")
 app.secret_key = f.readline()
 f.close()
-app.config['SESSION_COOKIE_SECURE'] = True
 
 class Resource:
     def __init__(self, name, role):
@@ -115,10 +114,12 @@ def login():
         session["logged_in"] = True
         session["user_type"] = user.user_type
         if user.user_type == "t":
+            session["username"] = username
             app.logger.info(f"Successful teacher login attempt: User '{username}' from IP {request.remote_addr}")
             return redirect('/teacher_homepage') 
         session["class_id"] = user.class_id
         session["name"] = user.name
+        session["username"] = username
         session["flags"] = ""
         app.logger.info(f"Successful student login attempt: User '{username}' from IP {request.remote_addr}")
         return redirect('/student_homepage') 
