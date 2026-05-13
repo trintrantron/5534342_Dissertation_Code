@@ -4,7 +4,7 @@
 <head>
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
     <script>
-        const socket = io();
+        const socket = io({reconnection: false});
 
         socket.on("connect", function () {
         socket.emit("join_class");
@@ -210,7 +210,7 @@
     <div class="banner">
         <img id="bannerLogo" src="{{ url_for('static', filename='smallCyberQuackBannerNoBackground.svg') }}">
         <h2>Welcome {{username}}!</h2>
-        <form class="noform" action="/logout" method ="POST">
+        <form class="noform" action="/logout_student" method ="POST">
             <button class="logout" type="submit">Logout</button>
         </form>
     </div>

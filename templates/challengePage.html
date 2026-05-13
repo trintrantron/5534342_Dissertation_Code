@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script>
+    const socket = io({
+        reconnection: false
+    });
+
+    socket.on("connect", function () {
+        socket.emit("join_class");
+        });
+
+    socket.on("game_over", function () {
+        socket.disconnect();
+        window.location.href = "/student_results";
+    });
+
+    socket.on("disconnect", function () {
+        console.log("Disconnected");
+    });
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Quack</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 100px;
+            background-color: #dedeff;
+            min-height: 100vh;
+        }
+
+        .column {
+            float: left;
+            text-align: center;
+            place-items: center;
+            width: 32%;
+            padding: 10px;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+            text-align: center;
+        }
+
+        @media screen and (max-width: 600px) {
+            .column {
+                width: 100%;
+            }
+        }
+
+        form {
+            background-color: #fff;
+            padding: none;
+            height: 350px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        .banner {
+            width: 100%;
+            height: 100px;
+            background-color: #9391ff; 
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-bottom:  5px solid #000000;
+            z-index: 999;
+        }
+        
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            font-family: "Raleway", sans-serif;
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .purple {
+            text-align: center;
+            font-size: 24px;
+            font-family: "Raleway", sans-serif;
+            color: #635dff;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .orange {
+            text-align: center;
+            font-size: 24px;
+            font-family: "Raleway", sans-serif;
+            color: #fc9432;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        
+        input,
+        button {
+            display: block;
+            margin: 20px 0;
+        }
+        
+        input {
+            width: 370px;
+            padding: 16px;
+            font-size: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-family: inherit;
+            margin: 1 auto;
+        }
+        
+        button {
+            width: 405px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: inherit;
+            align-items: center;
+            background-color: #9391ff;
+            color: #fff;
+            cursor: pointer;
+            margin: 0 auto;
+            font-weight: bold;
+            font-size: 22px;
+        }
+        
+        button:hover {
+            background-color: #fc9432;
+        }
+
+        .logout {
+            width: 160px;
+            height: 60px;
+            position: absolute;
+            right: 30px;
+            top: 20px;
+            background-color: #dedeff;
+            color: #000000;
+            font-size: 20px;
+            border: 5px solid #000000;
+        }
+        
+        #bannerText {
+            position: center;
+            height: 98px;
+        }
+
+        #bannerLogo {
+            height: 100px;
+            position: relative;
+            right: -5px;
+        }
+
+        .noform {
+            width: 1px;
+            height: 1px;
+            background-color: #9391ff;
+            padding: 0px;
+            border-radius: 0px;
+        }
+
+        .options {
+            background-color: #9391ff;
+            padding: 30px;
+            border-radius: 10px;
+            align-self: center;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .options:hover {
+            scale: 1.05;
+        }
+
+        #buttonSticker {
+            width: 350px;
+        }
+
+        .score {
+            position: absolute;
+            right: 210px;
+            top: 30px;
+            text-align: right;
+            font-size: 40px;
+            font-family: "Raleway", sans-serif;
+            color: #ffffff;
+            font-weight: bold;
+            margin-right: 50px;
+        }
+
+        .buttonTitle {
+            text-align: center;
+            font-size: 40px;
+            font-family: "Raleway", sans-serif;
+            color: #ffffff;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .buttonDescription {
+            text-align: center;
+            font-size: 20px;
+            font-family: "Raleway", sans-serif;
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 50px;
+            font-family: "Raleway", sans-serif;
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            font-family: "Raleway", sans-serif;;
+            font-size: 30px;
+            color: #9391ff;
+            display: block;
+            font-weight: bold;
+            text-align: left;
+            margin-top: 200px;
+        }
+
+        a:hover {
+            color: #fc9432;
+        }
+
+        .completed {
+            background-color: #a9e7af;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div class="banner">
+        <img id="bannerLogo" src="{{ url_for('static', filename='smallCyberQuackBannerNoBackground.svg') }}">
+        <h2>Welcome {{username}}!</h2>
+        <form class="noform" action="/logout_student" method ="POST">
+            <button class="logout" type="submit">Logout</button>
+        </form>
+        <div class="score">Current score: {{score}}!</div>
+    </div>
+    
+    <div class="row">
+        <div class="column">
+            <br><br><form action="/practice" method ="POST">
+                <button class="options {% if flags[0] %}completed{% endif %}" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='gooseHeadNoBackground.svg') }}"><span class="buttonTitle">Practice!</span><br><br><span class="buttonDescription">This practice challenge is worth 10 points and is your chance to practice entering a flag!</span></button>
+            </form>
+            <br><br><br><br><br><br><br><br><br><br><br><br><form action="/challenge_3" method ="POST">
+                <button class="options {% if flags[3] %}completed{% endif %}" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='threeGoosesImg.png') }}"><span class="buttonTitle">Challenge 3</span><br><br><span class="buttonDescription">This challenge is an introduction to digital forensics, which is like detective work on computers!<br><br></span></button>
+            </form>
+        </div>
+
+        <div class="column">
+            <br><br><form action="/challenge_1" method ="POST">
+                <button class="options {% if flags[1] %}completed{% endif %}" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='threeGoosesImg.png') }}"><span class="buttonTitle">Challenge 1</span><br><br><span class="buttonDescription">This challenge is an introduction to cracking passwords!<br><br></span></button>
+            </form>
+            <br><br><br><br><br><br><br><br><br><br><br><br><form action="/challenge_4" method ="POST">
+                <button class="options {% if flags[4] %}completed{% endif %}" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='haveAQuackNoTitle.svg') }}"><span class="buttonTitle">Challenge 4</span><br><br><span class="buttonDescription">This challenge is an introduction to open sorurce intelligence, which involves exploiting publically available information!</span></button>
+            </form>
+            <br><br><br><a href="/tutorial">Return to tutorial</a>
+        </div>
+
+        <div class="column">
+            <br><br><form action="/challenge_2" method ="POST">
+                <button class="options {% if flags[2] %}completed{% endif %}" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='haveAQuackNoTitle.svg') }}"><span class="buttonTitle">Challenge 2</span><br><br><span class="buttonDescription">This challenge is an introduction to cryptography, which is the science of secret codes to hide information!</span></button>
+            </form>
+            <br><br><br><br><br><br><br><br><br><br><br><br><form action="/challenge_5" method ="POST">
+                <button class="options {% if flags[5] %}completed{% endif %}" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='threeGoosesImg.png') }}"><span class="buttonTitle">Challenge 5</span><br><br><span class="buttonDescription">This challenge is an introduction to network analysis, which is the interception and investigation of data sent between devices!</span></button>
+            </form>
+        </div>
+    </div>
+    
+
+</body>
+</html>
+
+<!-- {% if flags[1] %}disabled{% endif %} -->

@@ -12,11 +12,16 @@ import os
 from password_generator import PasswordGenerator
 from time import sleep
 from threading import Thread
+from flask import Flask, send_file
+from reportlab.pdfgen import canvas
+from io import BytesIO
 
 
 f = open("db_key", "r")
 key = f.readline()
 f.close()
+
+#FIGURE OUT HOW TO DO THIS!!!!
 
 def load_id_count(table):
     f = open("{0}_id_counter".format(table), "r")
@@ -74,7 +79,7 @@ class db:
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     class Students(Base): 
-        def __init__(self, name, password, salt, class_id):
+        def __init__(self, name, password, salt, class_id, password_plaintext):
             file = open("Users_id_counter", "r")
             id = file.read()
             id = int(id)
@@ -88,9 +93,10 @@ class db:
             self.password = password.decode("utf-8")
             self.salt = salt
             self.class_id = class_id
-            self.score = 0
+            self.score = "0"
             self.in_game = False
             self.user_type = "s"
+            self.password_plaintext = password_plaintext
 
         __tablename__ = "Students"   
 
@@ -102,6 +108,14 @@ class db:
         score = Column("Score", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
         in_game = Column("In Game", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
         user_type = Column("User Type", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
+        password_plaintext = Column("Plaintext Password", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
+
+        def update_student_score(self, points):
+            current_score = int(self.score)
+            to_add = int(points)
+            new_score = current_score + to_add
+            final_score = str(new_score)
+            self.score = final_score
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Class
@@ -131,17 +145,19 @@ class db:
 
     class Challenges(Base): 
         id_counter = count(start = load_id_count("Challenges"), step = 1)
-        def __init__(self, name, points):
+        def __init__(self, name, points, flag):
             self.challenge_id = str(next(self.id_counter))
             save_val("Challenges") 
             self.name = name
             self.points = points
+            self.flag = flag
 
         __tablename__ = "Challenges"   
 
         challenge_id = Column("Challenge ID", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'), primary_key = True)
         name = Column("Name",StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
         points = Column("Points", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
+        flag = Column("Flag", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Leaderboard
@@ -195,6 +211,34 @@ Base.metadata.create_all(bind=engine)
    
 Session = sessionmaker(bind=engine)
 session = Session()
+
+###################################################################################################################
+# Fill database with static values if empty 
+###################################################################################################################
+
+print("Before: ", session.query(db.Challenges).all())
+
+if session.query(db.Challenges).all() == []:
+    practice = db.Challenges("practice", "10", "cyber")
+    session.add(practice)
+    session.commit()
+    challenge_1 = db.Challenges("challenge_1", "100", "secret")
+    session.add(challenge_1)
+    session.commit()
+    challenge_2 = db.Challenges("challenge_2", "110", "hacker")
+    session.add(challenge_2)
+    session.commit()
+    challenge_3 = db.Challenges("challenge_3", "120", "notes.png")
+    session.add(challenge_3)
+    session.commit()
+    challenge_4 = db.Challenges("challenge_4", "130", "stella2007")
+    session.add(challenge_4)
+    session.commit()
+    challenge_5 = db.Challenges("challenge_5", "140", "orange")
+    session.add(challenge_5)
+    session.commit()
+
+print("After: ", session.query(db.Challenges).all())
 
 ###################################################################################################################
 # Defining Tasks
@@ -267,7 +311,7 @@ class Task:
             salt = bcrypt.gensalt()
             bpass = password.encode('utf-8')
             hash = bcrypt.hashpw(bpass, salt)
-            new_student = db.Students(usernames[i], hash, salt, class_id)
+            new_student = db.Students(usernames[i], hash, salt, class_id, password)
             session.add(new_student)
             session.commit()
             print(new_student.user_id, new_student.name, new_student.class_id, new_student.password, new_student.score, new_student.user_type)
@@ -332,7 +376,45 @@ class Task:
         session.delete(this_class)
         session.commit()
 
+    def update_score(user, challenge_name):
+        challenge = session.query(db.Challenges).filter(db.Challenges.name==challenge_name).one()
+        points = challenge.points
+        user.update_student_score(points)
 
+    def get_flag(challenge_name):
+        challenge = session.query(db.Challenges).filter(db.Challenges.name==challenge_name).one()
+        flag = challenge.flag
+        return flag
+                                                    
+    def students_in_class(class_id):
+        students = session.query(db.Students).filter(db.Students.class_id==class_id).all()
+        return students
+        
+    def make_pdf(class_id):
+        buffer = BytesIO()
+        pdf = canvas.Canvas(buffer)
+        y = 800
+        pdf.setFont("Helvetica", 13)
+        students = Task.students_in_class(class_id)
+        for student in students:
+            line = (
+                f"Student: {student.name}  |  "
+                f"Username: {student.user_id}  |  "
+                f"Password: {student.password_plaintext}"
+            )
+            pdf.drawString(40, y, line)
+
+            y -= 50
+
+            if y < 50:
+                pdf.showPage()
+                pdf.setFont("Helvetica", 13)
+                y = 800
+
+
+        pdf.save()
+        buffer.seek(0)
+        return buffer
 
 
 
@@ -384,5 +466,4 @@ class Task:
         special_char = "*%!@()[]$£?~#=+-/|"
         if not any(special in special_char for special in password): return (False, f"Password must contain a special character: {special_char}")
         return (True, "Valid Password")
-
 

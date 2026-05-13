@@ -262,6 +262,13 @@
             display: none;
         }
 
+        #players li {
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 32px;
+            color: #9391ff;
+            font-weight: bold;
+        }
+
     </style>
 </head>
 
@@ -276,7 +283,7 @@
 
     <div class="row">
         <div class="column">
-            <img id="logo" src="{{ url_for('static', filename='goose.svg') }}">
+            <img id="logo" src="{{ url_for('static', filename='gooseImg.png') }}">
         </div>
 
         <div class="column">
@@ -288,10 +295,11 @@
                 <form id="finishButton" method="post">
                     <button onclick="startGame()" type="button">Start game!</button>
                 </form>
+                <h2 id="playerCount">0 students in the game...</h2>
             </div>
         </div>
         <div class="column">
-            <img id="logo" src="{{ url_for('static', filename='goose.svg') }}">
+            <img id="logo" src="{{ url_for('static', filename='gooseImgFlip.png') }}">
         </div>
     </div>
     <script>
@@ -303,8 +311,10 @@
             window.location.href = "/leaderboard";
         }
 
-        const classId = "{{ class_id }}";
+        const classId = "{{class_id}}";
         const username = "{{username}}"
+        console.log("\n\nUSERNAME =", "{{ username }}"); 
+        console.log("CLASS_ID =", "{{ class_id }}\n\n");
 
         socket.emit("join_class");
 
@@ -313,12 +323,15 @@
             list.innerHTML = "";
 
             users.forEach(user => {
-                if (user.username !== username) {
+                if (user.name !== username) {
                     const li = document.createElement("li");
-                    li.textContent = user.name;
+                    li.textContent = "Player "+user.name+" joined!";
                     list.appendChild(li);
                 }
             });
+
+            document.getElementById("playerCount").textContent =
+                users.length + " students in the game...";
         });
     </script>
 </body>

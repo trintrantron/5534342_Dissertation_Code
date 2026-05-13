@@ -262,6 +262,14 @@
             display: none;
         }
 
+        #leaderboard li {
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 45px;
+            color: #635dff;
+            font-weight: bold;
+            list-style-type: decimal;
+        }
+
     </style>
 </head>
 
@@ -276,43 +284,52 @@
 
     <div class="row">
         <div class="column">
-            <img id="logo" src="{{ url_for('static', filename='goose.svg') }}">
+            <img id="logo" src="{{ url_for('static', filename='threeGoosesImg.png') }}">
         </div>
 
         <div class="column">
             <div>
-
                 <h1>Leaderboard:</h1>
-                <ul id="players"></ul>
-
-                <script>
-                const socket = io();
-                const classId = "{{ class_id }}";
-                const username = "{{username}}"
-
-                socket.emit("join_class");
-
-                socket.on("user_list", function(users) {
-                    const list = document.getElementById("players");
-                    list.innerHTML = "";
-
-                    users.forEach(user => {
-                        if (user.username !== username) {
-                            const li = document.createElement("li");
-                            li.textContent = user.username;
-                            list.appendChild(li);
-                        }
-                    });
-                });
-                </script>
+                <ul id="leaderboard"></ul>
+                <br><br><br><br>
                 <form id="finishButton" method="post">
                     <button onclick="endGame()" type="button">End game!</button>
                 </form>
             </div>
         </div>
         <div class="column">
-            <img id="logo" src="{{ url_for('static', filename='goose.svg') }}">
+            <img id="logo" src="{{ url_for('static', filename='threeGoosesImgFlip.png') }}">
         </div>
     </div>
+    <script>
+        const socket = io();
+
+        function endGame() 
+        {
+            socket.emit("end_game");
+            window.location.href = "/results";
+        }
+
+        const classId = "{{ class_id }}";
+        const username = "{{username}}"
+
+        socket.emit("join_class");
+
+        function updateLeaderboard(players) {
+            const leaderboard =
+                document.getElementById("leaderboard");
+            leaderboard.innerHTML = "";
+            players.forEach(player => {
+                const li = document.createElement("li");
+                li.textContent =
+                    player.name + ": " + player.score;
+                leaderboard.appendChild(li);
+            });
+        }
+
+        socket.on("score_change", function(data) {
+            updateLeaderboard(data);
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script>
+    const socket = io({
+        reconnection: false
+    });
+
+    socket.on("connect", function () {
+        socket.emit("join_class");
+        });
+
+    socket.on("game_over", function () {
+        socket.disconnect();
+        window.location.href = "/student_results";
+    });
+
+    socket.on("disconnect", function () {
+        console.log("Disconnected");
+    });
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Quack</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 100px;
+            background-color: #dedeff;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 30px;
+            height: 350px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            margin-bottom: 130px;
+        }
+
+        .banner {
+            width: 100%;
+            height: 100px;
+            background-color: #9391ff; 
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-bottom:  5px solid #000000;
+            z-index: 999;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 50px;
+            font-family: "Raleway", sans-serif;
+            color: #ffffff;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            font-family: "Raleway", sans-serif;
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .purple {
+            text-align: center;
+            font-size: 24px;
+            font-family: "Raleway", sans-serif;
+            color: #635dff;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .orange {
+            text-align: center;
+            font-size: 24px;
+            font-family: "Raleway", sans-serif;
+            color: #fc9432;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        
+        input,
+        button {
+            display: block;
+            margin: 20px 0;
+        }
+        
+        input {
+            width: 370px;
+            padding: 16px;
+            font-size: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-family: inherit;
+            margin: 1 auto;
+        }
+        
+        button {
+            width: 405px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: inherit;
+            align-items: center;
+            background-color: #9391ff;
+            color: #fff;
+            cursor: pointer;
+            margin: 0 auto;
+            font-weight: bold;
+            font-size: 22px;
+        }
+        
+        button:hover {
+            background-color: #fc9432;
+        }
+
+        .logout {
+            width: 160px;
+            height: 60px;
+            position: absolute;
+            right: 30px;
+            top: 20px;
+            background-color: #dedeff;
+            color: #000000;
+            font-size: 20px;
+            border: 5px solid #000000;
+        }
+        
+        #bannerText {
+            position: center;
+            height: 98px;
+        }
+
+        #bannerLogo {
+            height: 100px;
+            position: relative;
+            right: -5px;
+        }
+
+        .noform {
+            width: 1px;
+            height: 1px;
+            background-color: #9391ff;
+            padding: 0px;
+            border-radius: 0px;
+        }
+
+        .noform1 {
+            width: 1px;
+            height: 1px;
+            background-color: #9391ff;
+            padding: 0px;
+        }
+
+        .options {
+            background-color: #9391ff;
+            padding: 30px;
+            border-radius: 10px;
+            align-self: center;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .options:hover {
+            scale: 1.05;
+        }
+
+        #buttonSticker {
+            width: 350px;
+        }
+
+        .score {
+            position: absolute;
+            right: 210px;
+            top: 30px;
+            text-align: right;
+            font-size: 40px;
+            font-family: "Raleway", sans-serif;
+            color: #ffffff;
+            font-weight: bold;
+            margin-right: 50px;
+        }
+
+        .buttonTitle {
+            text-align: center;
+            font-size: 40px;
+            font-family: "Raleway", sans-serif;
+            color: #ffffff;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .taskDescription {
+            text-align: center;
+            font-size: 30px;
+            font-family: "Raleway", sans-serif;
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 50px;
+            font-family: "Raleway", sans-serif;
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            font-family: "Raleway", sans-serif;;
+            font-size: 25px;
+            color: #635dff;
+            display: block;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        a:hover {
+            color: #fc9432;
+        }
+
+        .menu {
+            position: absolute;
+            position: fixed;
+            left: 0px;
+            top: 100px;
+            background-color: #9391ff;
+            font-family: "Raleway", sans-serif;
+            height: 100%;
+            width: 430px;
+            padding:20px
+        }
+
+        #flag {
+            position: absolute;
+            left: 216px;
+            bottom: 155px;
+            width: 150px;
+            height: 15px;
+            background-color: #dedeff;
+            color: #000000;
+            font-size: 20px;
+            border: 5px solid #000000;
+        }
+
+        #ctf {
+            position: absolute;
+            position: fixed;
+            left: 108px;
+            bottom: 15px;
+            font-size: 40px;
+            color: #ffffff;
+        }
+
+        #ctf1 {
+            position: absolute;
+            position: fixed;
+            left: 412px;
+            bottom: 15px;
+            font-size: 40px;
+            color: #ffffff;
+        }
+
+        #flagDescription {
+            position: absolute;
+            position: fixed;
+            left: 15px;
+            bottom: 100px;
+            color: #ffffff;
+        }
+
+        .note {
+            position: absolute;
+            position: fixed;
+            right: 0px;
+            top: 100px;
+            font-family: "Raleway", sans-serif;
+            width: 400px;
+            margin:60px;
+        }
+
+        #note {
+            width: 400px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .login {
+            margin-top: 20px;
+            height: 600px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: fixed;
+        }
+
+        #profile {
+            width:300px;
+            margin: 1px;
+        }
+
+        .packet {
+            margin-left: 400px;
+            width: 1px;
+            height: 1px;
+            background-color: #9391ff;
+            padding: 0px;
+            border-radius: 0px;
+        }
+
+        #packet {
+            width: 700px;
+        }
+
+        .key {
+            position: absolute;
+            position: fixed;
+            right: 0px;
+            top: 100px;
+            font-family: "Raleway", sans-serif;
+            width: 300px;
+            height: 300px;
+            margin:60px;
+            color: #ffffff;
+            background-color: #635dff;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+
+        #key {
+            color: #ffffff;
+        }
+
+        .noform-back {
+            position: absolute;
+            position: fixed;
+            right: 0px;
+            top: 500px;
+            font-family: "Raleway", sans-serif;
+            margin:60px;
+            border-radius: 10px;
+            width: 360px;
+            height: 1px;
+            background-color: #9391ff;
+            padding: 0px;
+            border-radius: 0px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="banner">
+        <img id="bannerLogo" src="{{ url_for('static', filename='smallCyberQuackBannerNoBackground.svg') }}">
+        <h2>Welcome {{username}}!</h2>
+        <form class="noform" action="/logout_student" method ="POST">
+            <button class="logout" type="submit">Logout</button>
+        </form>
+        <div class="score">Current score: {{score}}!</div>
+    </div>
+    <div class="menu">
+        <a href="/challenge_page">Return to challenge page</a>
+        <h1><u>Challenge brief:</u></h1>
+        <div class="taskDescription">You've intercepted network traffic to find emails sent between Aditi and Henry...</div>
+        <div class="taskDescription">When information is sent between two devices it is sent in packets with lots of computer information.</div>
+        <div class="taskDescription">Look through these packets to find the secret colour that Henry sent to Aditi.</div>
+        <div class="taskDescription" id="flagDescription">The flag is the secret colour:</div>
+        <h2 id="ctf">CTF {</h2>
+        <h2 id="ctf1">}</h2>
+        <form class="noform1" action="/flag_5" method="post">
+            <input type="text" id="flag" name="flag" placeholder="Flag" required>
+        </form>
+    </div>
+    <br><br><form class="packet">
+        <img id="packet" src="{{ url_for('static', filename='packet4exp.png') }}">
+    </form>
+    <form class="key">
+        <h1>Hint:</h1>
+        <div class="taskDescription"><span id="key">Try to ignore all the extra information and focus on what you need...</span></div>
+    </form>
+    <form class="noform-back">
+        <a href="/challenge_5">Return to challenge 5</a>
+    </form>
+</body>
+</html>

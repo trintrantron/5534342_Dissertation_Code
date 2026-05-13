@@ -11,7 +11,28 @@
             padding: 100px;
             background-color: #dedeff;
             min-height: 100vh;
+        }
+
+        .column {
+            float: left;
             text-align: center;
+            place-items: center;
+            width: 32%;
+            padding: 10px;
+            margin-top: 50px;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+            text-align: center;
+        }
+
+        @media screen and (max-width: 600px) {
+            .column {
+                width: 100%;
+            }
         }
 
         form {
@@ -91,13 +112,12 @@
         a {
             text-decoration: none;
             font-family: Arial, sans-serif;
-            font-size: 26px;
-            color: #9391ff;
+            font-size: 18px;
+            color: #262626;
             display: block;
             text-align: center;
             margin-top: 15px;
             font-weight: bold;
-            background-color: #9391ff;
         }
         
         input,
@@ -181,7 +201,8 @@
         }
 
         a:hover {
-            scale: 1.02;
+            scale: 1.1;
+            color: #fc9432;
         }
 
         .noform {
@@ -211,7 +232,9 @@
 
         #delete {
             width: 100px;
+            height: 40px;
             margin-right: 200px;
+            padding: 7px;
         }
 
         .grid {
@@ -219,7 +242,6 @@
             font-family: "Raleway", sans-serif;
             font-weight: bold;
             top: 250px;
-            left: 500px;
         }
 
         .noformstudent {
@@ -234,7 +256,7 @@
 
         .class {
             display: inline-block;
-            margin-right: 100px;
+            margin-right: 50px;
         }
 
         .hidden {
@@ -252,24 +274,39 @@
             <button class="logout" type="submit">Logout</button>
         </form>
     </div>
-        <h1>Your classes:</h1>
-        <div class="grid">
-            {% for class in class_temp %}
-                <div>
-                    <h2 class="class">{{class.class_name}}</h1>
-                    <form class="noformstudent" action="/edit_class" method="post">
-                        <input class="hidden" name="className" value="{{class.class_name}}">
-                        <button id="delete" type="submit">Edit</button>
-                    </form>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                    <form class="noformstudent" action="/delete_class" method="post">
-                        <input class="hidden" name="className" value="{{class.class_name}}">
-                        <button id="delete" type="submit">Delete</button>
-                    </form>
-                </div>
-            {% endfor %}
+
+    <div class="row">
+        <div class="column">
+            <img id="logo" src="{{ url_for('static', filename='gooseImg.png') }}">
+        </div>
+
+        <div class="column">
+            <h1>Your classes:</h1>
+            <div class="grid">
+                {% for class in class_temp %}
+                    <div>
+                        <h2 class="class">{{class.class_name}}</h1>
+                        <form class="noformstudent" action="/edit_class" method="post">
+                            <input class="hidden" name="classID" value="{{class.class_id}}">
+                            <button id="delete" type="submit">Edit</button>
+                        </form>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        <form class="noformstudent" action="/delete_class" method="post">
+                            <input class="hidden" name="classID" value="{{class.class_id}}">
+                            <button id="delete" type="submit">Delete</button>
+                        </form>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        <form class="noformstudent" action="/download_pdf" method="post">
+                            <input class="hidden" name="classID" value="{{class.class_id}}">
+                            <button id="delete" type="submit">Download</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+            <br><a href="/teacher_homepage">Back to dashboard</a>
+        </div>
+        <div class="column">
+            <img id="logo" src="{{ url_for('static', filename='gooseImgFlip.png') }}">
         </div>
     </div>
-
 
 </body>
 </html>

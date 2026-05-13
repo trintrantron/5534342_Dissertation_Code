@@ -3,6 +3,24 @@
 
 <head>
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script>
+    const socket = io({
+        reconnection: false
+    });
+
+    socket.on("connect", function () {
+        socket.emit("join_class");
+        });
+
+    socket.on("game_over", function () {
+        socket.disconnect();
+        window.location.href = "/student_results";
+    });
+
+    socket.on("disconnect", function () {
+        console.log("Disconnected");
+    });
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cyber Quack</title>
@@ -20,7 +38,7 @@
             place-items: center;
             width: 32%;
             padding: 10px;
-            margin-top: 50px;
+            margin-top: 1px;
         }
 
         .row:after {
@@ -39,9 +57,11 @@
         form {
             background-color: #fff;
             padding: 30px;
+            height: 350px;
             border-radius: 15px;
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
             width: 400px;
+            margin-bottom: 130px;
         }
 
         #finishButton {
@@ -50,6 +70,16 @@
 
         .studentInput {
             height: 230px;
+        }
+
+        input {
+            width: 370px;
+            padding: 16px;
+            font-size: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-family: inherit;
+            margin: 1 auto;
         }
 
         .banner {
@@ -68,7 +98,7 @@
             text-align: center;
             font-size: 50px;
             font-family: "Raleway", sans-serif;
-            color: #000000;
+            color: #ffffff;
             font-weight: bold;
             margin-bottom: 30px;
         }
@@ -82,9 +112,17 @@
             margin-bottom: 30px;
         }
 
+        h3 {
+            text-align: center;
+            font-size: 70px;
+            font-family: "Raleway", sans-serif;
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
         .purple {
             text-align: center;
-            font-size: 24px;
             font-family: "Raleway", sans-serif;
             color: #635dff;
             font-weight: bold;
@@ -102,23 +140,12 @@
         
         label {
             text-align: center;
-            font-size: 14px;
+            font-size: 20px;
             font-family: inherit;
-            color: #ff0000;
+            color: #635dff;
             font-weight: bold;
             display: block;
             margin-top: 10px;
-        }
-        
-        a {
-            text-decoration: none;
-            font-family: Arial, sans-serif;
-            font-size: 18px;
-            color: #262626;
-            display: block;
-            text-align: center;
-            margin-top: 15px;
-            font-weight: bold;
         }
         
         input,
@@ -135,6 +162,43 @@
             border-radius: 3px;
             font-family: inherit;
             margin: 1 auto;
+        }
+
+        #flag {
+            position: absolute;
+            left: 216px;
+            bottom: 155px;
+            width: 150px;
+            height: 15px;
+            background-color: #dedeff;
+            color: #000000;
+            font-size: 20px;
+            border: 5px solid #000000;
+        }
+
+        #ctf {
+            position: absolute;
+            position: fixed;
+            left: 108px;
+            bottom: 15px;
+            font-size: 40px;
+            color: #ffffff;
+        }
+
+        #ctf1 {
+            position: absolute;
+            position: fixed;
+            left: 412px;
+            bottom: 15px;
+            font-size: 40px;
+            color: #ffffff;
+        }
+
+        #ctf2 {
+            position: absolute;
+            position: fixed;
+            left: 190px;
+            bottom: 5px;
         }
         
         button {
@@ -194,6 +258,7 @@
         }
 
         #logo {
+            margin-top: 100px;
             width: 100%;
         }
 
@@ -201,9 +266,18 @@
             width: 15%;
         }
 
+        a {
+            text-decoration: none;
+            font-family: "Raleway", sans-serif;;
+            font-size: 25px;
+            color: #635dff;
+            display: block;
+            font-weight: bold;
+            text-align: center;
+        }
+
         a:hover {
-            scale: 1.02;
-            color: #9391ff;
+            color: #fc9432;
         }
 
         .noform {
@@ -214,12 +288,28 @@
             border-radius: 0px;
         }
 
+        .noform1 {
+            width: 1px;
+            height: 1px;
+            background-color: #9391ff;
+            padding: 0px;
+        }
+
         .options {
             background-color: #9391ff;
             padding: 30px;
             border-radius: 10px;
             align-self: center;
             box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .taskDescription {
+            text-align: center;
+            font-size: 30px;
+            font-family: "Raleway", sans-serif;
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 20px;
         }
 
         .title {
@@ -262,6 +352,26 @@
             display: none;
         }
 
+        .menu {
+            position: absolute;
+            position: fixed;
+            left: 0px;
+            top: 100px;
+            background-color: #9391ff;
+            font-family: "Raleway", sans-serif;
+            height: 100%;
+            width: 430px;
+            padding:20px
+        }
+
+        #flagDescription {
+            position: absolute;
+            position: fixed;
+            left: 15px;
+            bottom: 100px;
+            color: #ffffff;
+        }
+
     </style>
 </head>
 
@@ -269,25 +379,42 @@
     <div class="banner">
         <img id="bannerLogo" src="{{ url_for('static', filename='smallCyberQuackBannerNoBackground.svg') }}">
         <h2>Welcome {{username}}!</h2>
-        <form class="noform" action="/logout" method ="POST">
+        <form class="noform" action="/logout_student" method ="POST">
             <button class="logout" type="submit">Logout</button>
         </form>
     </div>
 
     <div class="row">
+        <div class="menu">
+        <h1><u>Challenge brief:</u></h1>
+        <div class="taskDescription">This is where you find the instructions for how to complete the challenge!</div>
+        <div class="taskDescription">You need to read this carefully to make sure you know what to do!</div>
+        <div class="taskDescription" id="flagDescription">Once you have worked out<br>what the flag is, you type it<br>into the box below and press<br>enter:</div>
+        <h2 id="ctf">CTF {</h2>
+        <h2 id="ctf1">}</h2>
+        <form class="noform1" action="/tutorial_flag" method="post">
+            <input type="text" id="flag" name="flag" placeholder="Flag" required>
+        </form>
+        <label id="ctf2">{{message1}}</label>
+    </div>
         <div class="column">
-            <img id="logo" src="{{ url_for('static', filename='goose.svg') }}">
+            
         </div>
 
         <div class="column">
             <div>
-                </form>
-                    <h1>Yay tutorial here!!!</h1>
+                <h3>Welcome to the tutorial!!!</h3><br><br><br>
+                <div class="taskDescription"><span class="purple">This is where you find the challenge!</span></div>
+                <div class="taskDescription"><span class="purple">This may include things to click on or look at!</span></div>
+                <div class="taskDescription"><span class="purple">Just make sure that you read the challenge brief first...</span></div>
+                <br><br><br><br>
+                <form id="finishButton" action="/challenge_page" method="post">
+                    <button type="submit">I understand!</button>
                 </form>
             </div>
         </div>
         <div class="column">
-            <img id="logo" src="{{ url_for('static', filename='goose.svg') }}">
+            <img id="logo" src="{{ url_for('static', filename='gooseImgFlip.png') }}">
         </div>
     </div>
 </body>

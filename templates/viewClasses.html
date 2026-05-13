@@ -11,6 +11,7 @@
             padding: 100px;
             background-color: #dedeff;
             min-height: 100vh;
+            text-align: center;
         }
 
         .column {
@@ -237,6 +238,13 @@
             padding: 7px;
         }
 
+        #download {
+            width: 120px;
+            height: 40px;
+            margin-right: 200px;
+            padding: 7px;
+        }
+
         .grid {
             color: #dedeff;
             font-family: "Raleway", sans-serif;
@@ -263,6 +271,28 @@
             display: none;
         }
 
+        .right {
+            margin-top: 100px;
+            position: absolute;
+            position: fixed;
+            right: 0px;
+            top: 100px;
+            height: 100%;
+            width: 430px;
+            padding:20px
+        }
+
+        .left {
+            margin-top: 100px;
+            position: absolute;
+            position: fixed;
+            left: 0px;
+            top: 100px;
+            height: 100%;
+            width: 430px;
+            padding:20px
+        }
+
     </style>
 </head>
 
@@ -275,33 +305,34 @@
         </form>
     </div>
 
-    <div class="row">
-        <div class="column">
-            <img id="logo" src="{{ url_for('static', filename='goose.svg') }}">
-        </div>
+    <div class="left">
+        <img id="logo" src="{{ url_for('static', filename='gooseImg.png') }}">
+    </div>
 
-        <div class="column">
-            <h1>Your classes:</h1>
-            <div class="grid">
-                {% for class in class_temp %}
-                    <div>
-                        <h2 class="class">{{class.class_name}}</h1>
-                        <form class="noformstudent" action="/edit_class" method="post">
-                            <input class="hidden" name="classID" value="{{class.class_id}}">
-                            <button id="delete" type="submit">Edit</button>
-                        </form>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        <form class="noformstudent" action="/delete_class" method="post">
-                            <input class="hidden" name="classID" value="{{class.class_id}}">
-                            <button id="delete" type="submit">Delete</button>
-                        </form>
-                    </div>
-                {% endfor %}
+    <h1>Your classes:</h1>
+    <div class="grid">
+        {% for class in class_temp %}
+            <div>
+                <h2 class="class">{{class.class_name}}</h1>
+                <form class="noformstudent" action="/edit_class" method="post">
+                    <input class="hidden" name="classID" value="{{class.class_id}}">
+                    <button id="delete" type="submit">Edit</button>
+                </form>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <form class="noformstudent" action="/delete_class" method="post">
+                    <input class="hidden" name="classID" value="{{class.class_id}}">
+                    <button id="delete" type="submit">Delete</button>
+                </form>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <form class="noformstudent" action="/download_pdf" method="post">
+                    <input class="hidden" name="classID" value="{{class.class_id}}">
+                    <button id="download" type="submit">Download</button>
+                </form>
             </div>
-            <br><a href="/teacher_homepage">Back to dashboard</a>
-        </div>
-        <div class="column">
-            <img id="logo" src="{{ url_for('static', filename='goose.svg') }}">
-        </div>
+        {% endfor %}
+    </div>
+    <br><a href="/teacher_homepage">Back to dashboard</a>
+
+    <div class="right">
+        <img id="logo" src="{{ url_for('static', filename='gooseImgFlip.png') }}">
     </div>
 
 </body>

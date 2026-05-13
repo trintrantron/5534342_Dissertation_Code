@@ -177,3 +177,127 @@
 2026-05-01 01:08:31,326 - INFO - Successful student login attempt: User '2' from IP 127.0.0.1
 2026-05-01 01:13:55,020 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
 2026-05-01 01:14:22,390 - INFO - Successful student login attempt: User '2' from IP 127.0.0.1
+2026-05-01 01:15:40,682 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-01 01:16:03,052 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-01 01:16:48,921 - INFO - Successful student login attempt: User '3' from IP 127.0.0.1
+2026-05-01 01:17:28,435 - INFO - Successful student login attempt: User '4' from IP 127.0.0.1
+2026-05-01 01:26:40,993 - INFO - Successful student login attempt: User '5' from IP 127.0.0.1
+2026-05-02 12:48:11,578 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-02 17:45:30,258 - INFO - New user created: 'MrLeighton'
+2026-05-02 17:45:42,138 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-02 17:48:59,005 - INFO - Successful student login attempt: User '2' from IP 127.0.0.1
+2026-05-02 17:49:32,430 - INFO - Successful student login attempt: User '6' from IP 127.0.0.1
+2026-05-02 18:25:00,988 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-02 18:26:26,953 - INFO - Successful student login attempt: User '9' from IP 127.0.0.1
+2026-05-02 19:20:02,382 - INFO - Successful student login attempt: User '9' from IP 127.0.0.1
+2026-05-02 19:21:29,756 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-02 19:26:59,198 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-02 19:30:55,494 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-02 20:11:11,040 - INFO - New user created: 'MrLeighton'
+2026-05-02 20:11:16,029 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-02 20:19:42,179 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-02 20:23:33,990 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-02 22:10:42,340 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-02 22:15:21,220 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-02 22:17:25,195 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-02 22:17:57,874 - INFO - Successful student login attempt: User '18' from IP 127.0.0.1
+2026-05-02 22:18:29,476 - INFO - Successful student login attempt: User '19' from IP 127.0.0.1
+2026-05-02 22:24:37,449 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-02 22:25:12,234 - INFO - Successful student login attempt: User '20' from IP 127.0.0.1
+2026-05-02 22:25:22,983 - INFO - Successful student login attempt: User '21' from IP 127.0.0.1
+2026-05-02 22:25:51,422 - INFO - Successful student login attempt: User '22' from IP 127.0.0.1
+2026-05-02 22:26:36,065 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-02 22:50:05,480 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-02 23:00:30,946 - INFO - Successful student login attempt: User '23' from IP 127.0.0.1
+2026-05-02 23:00:41,955 - INFO - Successful student login attempt: User '24' from IP 127.0.0.1
+2026-05-02 23:00:52,345 - INFO - Successful student login attempt: User '25' from IP 127.0.0.1
+2026-05-02 23:07:28,101 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-02 23:07:52,088 - INFO - Successful student login attempt: User '23' from IP 127.0.0.1
+2026-05-02 23:08:15,596 - INFO - Successful student login attempt: User '24' from IP 127.0.0.1
+2026-05-02 23:08:31,122 - INFO - Successful student login attempt: User '25' from IP 127.0.0.1
+2026-05-02 23:21:32,905 - INFO - Successful student login attempt: User '25' from IP 127.0.0.1
+2026-05-03 12:52:00,987 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-03 12:52:37,118 - INFO - Successful student login attempt: User '25' from IP 127.0.0.1
+2026-05-03 12:57:11,833 - INFO - Successful student login attempt: User '25' from IP 127.0.0.1
+2026-05-03 12:57:17,833 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-03 13:14:21,564 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-03 13:14:27,223 - INFO - Successful student login attempt: User '25' from IP 127.0.0.1
+2026-05-03 13:15:11,931 - INFO - Successful student login attempt: User '25' from IP 127.0.0.1
+2026-05-03 13:15:18,418 - INFO - Successful student login attempt: User '25' from IP 127.0.0.1
+2026-05-03 13:15:30,650 - INFO - Successful student login attempt: User '25' from IP 127.0.0.1
+2026-05-03 13:48:25,191 - INFO - New user created: 'MrLeighton'
+2026-05-03 13:48:34,351 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-03 13:50:22,236 - INFO - Successful student login attempt: User '27' from IP 127.0.0.1
+2026-05-06 19:28:44,132 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-06 19:30:24,201 - INFO - Successful student login attempt: User '30' from IP 127.0.0.1
+2026-05-06 19:45:17,817 - INFO - Successful student login attempt: User '30' from IP 127.0.0.1
+2026-05-07 14:52:04,459 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-07 14:52:38,002 - INFO - Successful student login attempt: User '30' from IP 127.0.0.1
+2026-05-08 00:27:45,631 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-08 00:28:11,839 - INFO - Successful student login attempt: User '30' from IP 127.0.0.1
+2026-05-08 00:29:09,553 - INFO - Successful student login attempt: User '30' from IP 127.0.0.1
+2026-05-08 11:54:28,488 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-08 11:55:19,063 - INFO - Successful student login attempt: User '30' from IP 127.0.0.1
+2026-05-08 15:05:08,593 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-08 15:07:35,211 - INFO - Successful student login attempt: User '30' from IP 127.0.0.1
+2026-05-08 16:04:34,784 - INFO - Successful student login attempt: User '30' from IP 127.0.0.1
+2026-05-08 22:58:27,309 - INFO - Successful student login attempt: User '30' from IP 127.0.0.1
+2026-05-08 23:01:47,309 - INFO - Successful student login attempt: User '30' from IP 127.0.0.1
+2026-05-08 23:02:41,644 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-08 23:02:55,978 - INFO - Successful student login attempt: User '30' from IP 127.0.0.1
+2026-05-08 23:06:30,019 - INFO - Successful student login attempt: User '30' from IP 127.0.0.1
+2026-05-08 23:12:24,273 - INFO - Successful student login attempt: User '30' from IP 127.0.0.1
+2026-05-08 23:38:26,290 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-08 23:38:37,504 - INFO - Successful student login attempt: User '30' from IP 127.0.0.1
+2026-05-09 14:01:58,135 - WARNING - Failed login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-09 14:02:16,551 - INFO - New user created: 'MrLeighton'
+2026-05-09 14:02:26,288 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-09 14:04:20,797 - INFO - Successful student login attempt: User '39' from IP 127.0.0.1
+2026-05-09 15:05:07,759 - WARNING - Failed login attempt: User '39' from IP 127.0.0.1
+2026-05-09 15:05:32,081 - INFO - New user created: 'MrLeighton'
+2026-05-09 15:05:51,423 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-09 15:07:15,827 - INFO - Successful student login attempt: User '45' from IP 127.0.0.1
+2026-05-10 23:45:08,015 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-10 23:45:40,732 - INFO - Successful student login attempt: User '45' from IP 127.0.0.1
+2026-05-11 12:20:32,699 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-11 12:21:01,619 - WARNING - Failed login attempt: User '45' from IP 127.0.0.1
+2026-05-11 12:21:15,347 - INFO - Successful student login attempt: User '45' from IP 127.0.0.1
+2026-05-11 12:26:37,868 - INFO - Successful student login attempt: User '45' from IP 127.0.0.1
+2026-05-11 13:02:34,556 - INFO - Successful student login attempt: User '45' from IP 127.0.0.1
+2026-05-11 13:05:28,378 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-11 13:05:46,257 - INFO - Successful student login attempt: User '45' from IP 127.0.0.1
+2026-05-11 14:01:17,806 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-11 14:01:27,004 - INFO - Successful student login attempt: User '45' from IP 127.0.0.1
+2026-05-11 14:02:31,757 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-11 14:02:45,644 - INFO - Successful student login attempt: User '45' from IP 127.0.0.1
+2026-05-11 14:03:34,872 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-11 14:03:46,301 - INFO - Successful student login attempt: User '45' from IP 127.0.0.1
+2026-05-11 14:12:30,204 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-11 14:12:42,251 - INFO - Successful student login attempt: User '45' from IP 127.0.0.1
+2026-05-11 14:15:31,233 - INFO - Successful student login attempt: User '46' from IP 127.0.0.1
+2026-05-11 14:16:56,094 - INFO - Successful student login attempt: User '45' from IP 127.0.0.1
+2026-05-11 14:17:00,511 - INFO - Successful student login attempt: User '46' from IP 127.0.0.1
+2026-05-11 17:26:33,750 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-11 17:26:44,431 - INFO - Successful student login attempt: User '45' from IP 127.0.0.1
+2026-05-11 17:26:56,202 - INFO - Successful student login attempt: User '46' from IP 127.0.0.1
+2026-05-11 19:57:09,718 - INFO - Successful student login attempt: User '45' from IP 127.0.0.1
+2026-05-11 19:58:08,664 - INFO - Successful student login attempt: User '46' from IP 127.0.0.1
+2026-05-11 20:00:18,719 - INFO - Successful student login attempt: User '47' from IP 127.0.0.1
+2026-05-11 22:53:26,317 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-11 22:54:12,893 - INFO - Successful student login attempt: User '45' from IP 127.0.0.1
+2026-05-11 22:54:31,718 - INFO - Successful student login attempt: User '46' from IP 127.0.0.1
+2026-05-11 22:54:44,545 - INFO - Successful student login attempt: User '47' from IP 127.0.0.1
+2026-05-11 23:19:20,201 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-11 23:19:35,844 - INFO - Successful student login attempt: User '45' from IP 127.0.0.1
+2026-05-11 23:19:49,020 - INFO - Successful student login attempt: User '46' from IP 127.0.0.1
+2026-05-11 23:20:05,059 - INFO - Successful student login attempt: User '47' from IP 127.0.0.1
+2026-05-11 23:23:07,537 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-12 10:34:51,550 - WARNING - Failed login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-12 10:35:09,532 - WARNING - Failed login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-12 10:35:30,502 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-12 11:00:28,860 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-12 11:00:54,535 - WARNING - Failed login attempt: User '45' from IP 127.0.0.1
+2026-05-12 11:01:04,983 - INFO - Successful student login attempt: User '45' from IP 127.0.0.1
+2026-05-12 12:26:03,107 - INFO - New user created: 'MrLeighton'
+2026-05-12 12:26:39,564 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
+2026-05-12 14:07:02,008 - INFO - Successful student login attempt: User '49' from IP 127.0.0.1

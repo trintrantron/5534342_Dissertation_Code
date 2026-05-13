@@ -3,6 +3,41 @@
 
 <head>
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+    window.onload = function() {
+        var defaults = {
+        spread: 360,
+        ticks: 50,
+        gravity: 0,
+        decay: 0.94,
+        startVelocity: 20,
+        colors: ['FFE400', 'FFBD00', 'E89400', 'FFCA6C', 'FDFFB8']
+        };
+
+        function shoot() {
+        confetti({
+            ...defaults,
+            particleCount: 40,
+            scalar: 1.2,
+            shapes: ['star']
+        });
+
+        confetti({
+            ...defaults,
+            particleCount: 100,
+            scalar: 0.75,
+            shapes: ['circle']
+        });
+        }
+
+        setTimeout(shoot, 0);
+        setTimeout(shoot, 100);
+        setTimeout(shoot, 200);
+    };
+
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cyber Quack</title>
@@ -20,7 +55,7 @@
             place-items: center;
             width: 32%;
             padding: 10px;
-            margin-top: 50px;
+            margin-top: 30px;
         }
 
         .row:after {
@@ -80,6 +115,16 @@
             color: #000000;
             font-weight: bold;
             margin-bottom: 30px;
+        }
+
+        h3 {
+            text-align: center;
+            font-size: 35px;
+            font-family: "Raleway", sans-serif;
+            color: #635dff;
+            font-weight: bold;
+            margin-bottom: 30px;
+            list-style-type: decimal;
         }
 
         .purple {
@@ -194,6 +239,7 @@
         }
 
         #logo {
+            margin-top: 150px;
             width: 100%;
         }
 
@@ -276,19 +322,20 @@
 
     <div class="row">
         <div class="column">
-            <img id="logo" src="{{ url_for('static', filename='goose.svg') }}">
+            <img id="logo" src="{{ url_for('static', filename='threeGoosesImg.png') }}">
         </div>
 
         <div class="column">
             <div>
-                </form>
-                    <h1>Leaderboard:</h1>
-                </form>
-                <a href="/teacher_homepage">Return to dashboard</a>
+                <h1>Results:</h1>
+                <h3>1: {{top_3[0].name}} with {{top_3[0].score}} points!</h3>
+                <h3>2: {{top_3[1].name}} with {{top_3[1].score}} points!</h3>
+                <h3>3: {{top_3[2].name}} with {{top_3[2].score}} points!</h3>
+                <br><br><br><a href="/teacher_homepage">Return to dashboard</a>
             </div>
         </div>
         <div class="column">
-            <img id="logo" src="{{ url_for('static', filename='goose.svg') }}">
+            <img id="logo" src="{{ url_for('static', filename='threeGoosesImgFlip.png') }}">
         </div>
     </div>
 </body>

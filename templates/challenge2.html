@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script>
+    const socket = io({
+        reconnection: false
+    });
+
+    socket.on("connect", function () {
+        socket.emit("join_class");
+        });
+
+    socket.on("game_over", function () {
+        socket.disconnect();
+        window.location.href = "/student_results";
+    });
+
+    socket.on("disconnect", function () {
+        console.log("Disconnected");
+    });
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Quack</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 100px;
+            background-color: #dedeff;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 5px;
+            height: 350px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            margin-bottom: 130px;
+        }
+
+        .banner {
+            width: 100%;
+            height: 100px;
+            background-color: #9391ff; 
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-bottom:  5px solid #000000;
+            z-index: 999;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 50px;
+            font-family: "Raleway", sans-serif;
+            color: #ffffff;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            font-family: "Raleway", sans-serif;
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .purple {
+            text-align: center;
+            font-size: 24px;
+            font-family: "Raleway", sans-serif;
+            color: #635dff;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .orange {
+            text-align: center;
+            font-size: 24px;
+            font-family: "Raleway", sans-serif;
+            color: #fc9432;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        
+        input,
+        button {
+            display: block;
+            margin: 20px 0;
+        }
+        
+        input {
+            width: 370px;
+            padding: 16px;
+            font-size: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-family: inherit;
+            margin: 1 auto;
+        }
+        
+        button {
+            width: 405px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: inherit;
+            align-items: center;
+            background-color: #9391ff;
+            color: #fff;
+            cursor: pointer;
+            margin: 0 auto;
+            font-weight: bold;
+            font-size: 22px;
+        }
+        
+        button:hover {
+            background-color: #fc9432;
+        }
+
+        .logout {
+            width: 160px;
+            height: 60px;
+            position: absolute;
+            right: 30px;
+            top: 20px;
+            background-color: #dedeff;
+            color: #000000;
+            font-size: 20px;
+            border: 5px solid #000000;
+        }
+        
+        #bannerText {
+            position: center;
+            height: 98px;
+        }
+
+        #bannerLogo {
+            height: 100px;
+            position: relative;
+            right: -5px;
+        }
+
+        .noform {
+            width: 1px;
+            height: 1px;
+            background-color: #9391ff;
+            padding: 0px;
+            border-radius: 0px;
+        }
+
+        .noform1 {
+            width: 1px;
+            height: 1px;
+            background-color: #9391ff;
+            padding: 0px;
+        }
+
+        .options {
+            background-color: #9391ff;
+            padding: 30px;
+            border-radius: 10px;
+            align-self: center;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .options:hover {
+            scale: 1.05;
+        }
+
+        #buttonSticker {
+            width: 350px;
+        }
+
+        .score {
+            position: absolute;
+            right: 210px;
+            top: 30px;
+            text-align: right;
+            font-size: 40px;
+            font-family: "Raleway", sans-serif;
+            color: #ffffff;
+            font-weight: bold;
+            margin-right: 50px;
+        }
+
+        .buttonTitle {
+            text-align: center;
+            font-size: 40px;
+            font-family: "Raleway", sans-serif;
+            color: #ffffff;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .taskDescription {
+            text-align: center;
+            font-size: 30px;
+            font-family: "Raleway", sans-serif;
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 50px;
+            font-family: "Raleway", sans-serif;
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            font-family: "Raleway", sans-serif;;
+            font-size: 25px;
+            color: #635dff;
+            display: block;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        a:hover {
+            color: #fc9432;
+        }
+
+        .menu {
+            position: absolute;
+            position: fixed;
+            left: 0px;
+            top: 100px;
+            background-color: #9391ff;
+            font-family: "Raleway", sans-serif;
+            height: 100%;
+            width: 430px;
+            padding:20px
+        }
+
+        #flag {
+            position: absolute;
+            left: 216px;
+            bottom: 155px;
+            width: 150px;
+            height: 15px;
+            background-color: #dedeff;
+            color: #000000;
+            font-size: 20px;
+            border: 5px solid #000000;
+        }
+
+        #ctf {
+            position: absolute;
+            position: fixed;
+            left: 108px;
+            bottom: 15px;
+            font-size: 40px;
+            color: #ffffff;
+        }
+
+        #ctf1 {
+            position: absolute;
+            position: fixed;
+            left: 412px;
+            bottom: 15px;
+            font-size: 40px;
+            color: #ffffff;
+        }
+
+        #flagDescription {
+            position: absolute;
+            position: fixed;
+            left: 15px;
+            bottom: 100px;
+            color: #ffffff;
+        }
+
+        .note {
+            position: absolute;
+            position: fixed;
+            width: 500px;
+            margin:60px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #note {
+            width: 500px;
+
+        }
+
+        .key {
+            position: absolute;
+            position: fixed;
+            right: 0px;
+            top: 100px;
+            font-family: "Raleway", sans-serif;
+            width: 400px;
+            margin:60px;
+            color: #ffffff;
+            background-color: #635dff;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+            height: 450px;
+            border-radius: 10px;
+        }
+
+        #key {
+            color: #ffffff;
+        }
+
+        #ctf2 {
+            position: absolute;
+            position: fixed;
+            left: 212px;
+            bottom: 5px;
+        }
+
+        label {
+            text-align: center;
+            font-size: 20px;
+            font-family: inherit;
+            color: #635dff;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="banner">
+        <img id="bannerLogo" src="{{ url_for('static', filename='smallCyberQuackBannerNoBackground.svg') }}">
+        <h2>Welcome {{username}}!</h2>
+        <form class="noform" action="/logout_student" method ="POST">
+            <button class="logout" type="submit">Logout</button>
+        </form>
+        <div class="score">Current score: {{score}}!</div>
+    </div>
+    <div class="menu">
+        <a href="/challenge_page">Return to challenge page</a>
+        <h1><u>Challenge brief:</u></h1>
+        <div class="taskDescription">You have intercepted a secret message but it has been encrypted!</div>
+        <div class="taskDescription">This means that it is scrambled, so you need to unscramble the message to get the flag!</div>
+        <div class="taskDescription">Use the key that's been provided...</div>
+        <div class="taskDescription" id="flagDescription">The flag is the word you get <br>after you unscramble:</div>
+        <h2 id="ctf">CTF {</h2>
+        <h2 id="ctf1">}</h2>
+        <form class="noform1" action="/flag_2" method="post">
+            <input type="text" id="flag" name="flag" placeholder="Flag" required>
+        </form>
+        <label id="ctf2">{{message1}}</label>
+    </div>
+    <div class="note">
+        <img id="note" src="{{ url_for('static', filename='burntLetter.png') }}">
+    </div>
+
+    <form class="key">
+        <h1>Key:</h1>
+        <div class="taskDescription"><span id="key">a = z&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspj = q&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsps = h<br>b = y&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspk = p&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspt = g<br>c = x&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspl = o&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspu = f<br>d = w&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspm = n&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspv = e<br>e = v&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspn = m&nbsp&nbsp&nbsp&nbsp&nbsp&nbspw = d<br>f = u&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspo = l&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspx = c<br>g = t&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspp = k&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspy = b<br>h = s&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspq = j&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspz = a<br>i = r&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspr = i&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span></div>
+    </form>
+    
+
+</body>
+</html>
