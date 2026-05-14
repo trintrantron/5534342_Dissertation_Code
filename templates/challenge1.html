@@ -175,21 +175,26 @@
         }
 
         .noform1 {
-            width: 1px;
-            height: 1px;
-            background-color: #9391ff;
-            padding: 0px;
+            width: auto;
+            height: auto;
+            background-color: transparent;
+            padding: 0;
+            margin: 0;
         }
 
         .noform1 input {
-            width: 150px !important;
-            height: 15px !important;
-            padding: 0 !important;
-            margin: 0 !important;
-            font-size: 20px !important;
-            background-color: #dedeff !important;
-            color: #000000 !important;
-            border: 5px solid #000000 !important;
+            width: 370px;
+            max-width: 100%;
+            padding: 16px;
+            font-size: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-family: inherit;
+            margin: 20px auto;
+            display: block;
+            box-sizing: border-box;
+            background-color: #dedeff;
+            color: #000000;
         }
 
         .options {
@@ -361,7 +366,7 @@
             border: 5px solid #000000; 
         }
 
-        @media screen and (max-width: 600px) {
+        @media screen and (max-width: 650px) {
             .login {
                 width: min(320px, 90vw);
                 top: calc(100px + 4rem);
@@ -374,7 +379,7 @@
             }
 
             #profile {
-                width: 150px;
+                width: 100px;
             }
 
             .login input,
