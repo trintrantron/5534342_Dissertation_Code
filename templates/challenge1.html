@@ -105,21 +105,21 @@
         input,
         button {
             display: block;
-            margin: 20px 0;
+            margin: 20px auto;
+            max-width: 100%;
         }
         
         input {
-            width: 370px;
+            width: clamp(260px, 60vw, 420px);
             padding: 16px;
             font-size: 20px;
             border: 1px solid #ccc;
             border-radius: 3px;
             font-family: inherit;
-            margin: 1 auto;
         }
         
         button {
-            width: 405px;
+            width: clamp(260px, 60vw, 420px);
             padding: 15px;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -128,7 +128,6 @@
             background-color: #9391ff;
             color: #fff;
             cursor: pointer;
-            margin: 0 auto;
             font-weight: bold;
             font-size: 22px;
         }
@@ -214,7 +213,7 @@
 
         .taskDescription {
             text-align: center;
-            font-size: 30px;
+            font-size: 27px;
             font-family: "Raleway", sans-serif;
             color: #000000;
             font-weight: bold;
@@ -302,23 +301,28 @@
         }
 
         .note {
-            position: absolute;
             position: fixed;
-            right: 0px;
-            top: 100px;
+            right: clamp(1rem, 3vw, 2rem);
+            top: calc(100px + 1.5rem);
             font-family: "Raleway", sans-serif;
-            width: 400px;
-            margin:60px;
+            width: clamp(260px, 30vw, 420px);
+            max-width: 420px;
+            margin: 0;
         }
 
         #note {
-            width: 400px;
+            width: 100%;
+            height: auto;
             box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+            display: block;
         }
 
         .login {
+            width: clamp(320px, 55vw, 520px);
+            max-width: 520px;
             margin-top: 20px;
-            height: 600px;
+            padding: 30px;
+            height: auto;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);

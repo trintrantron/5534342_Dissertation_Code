@@ -204,7 +204,7 @@
 
         .taskDescription {
             text-align: center;
-            font-size: 30px;
+            font-size: 27px;
             font-family: "Raleway", sans-serif;
             color: #000000;
             font-weight: bold;
@@ -285,37 +285,41 @@
         }
 
         .note {
-            position: absolute;
             position: fixed;
-            width: 500px;
-            margin:60px;
+            width: clamp(260px, 30vw, 500px);
+            max-width: 500px;
+            margin: 0;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
         }
 
         #note {
-            width: 500px;
-
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
         .key {
-            position: absolute;
             position: fixed;
-            right: 0px;
-            top: 100px;
+            right: clamp(1rem, 3vw, 1.5rem);
+            top: calc(100px + 1.5rem);
             font-family: "Raleway", sans-serif;
-            width: 400px;
-            margin:60px;
+            width: clamp(280px, 32vw, 420px);
+            max-width: 420px;
+            margin: 0;
+            padding: clamp(1rem, 2vw, 1.5rem);
             color: #ffffff;
             background-color: #635dff;
             box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-            height: 450px;
+            height: auto;
             border-radius: 10px;
         }
 
         #key {
             color: #ffffff;
+            display: block;
+            white-space: pre-wrap;
         }
 
         #ctf2 {
@@ -351,8 +355,7 @@
         <a href="/challenge_page">Return to challenge page</a>
         <h1><u>Challenge brief:</u></h1>
         <div class="taskDescription">You have intercepted a secret message but it has been encrypted!</div>
-        <div class="taskDescription">This means that it is scrambled, so you need to unscramble the message to get the flag!</div>
-        <div class="taskDescription">Use the key that's been provided...</div>
+        <div class="taskDescription">This means that it is scrambled, so you need to unscramble the message using the key to get the flag!</div>
         <div class="taskDescription" id="flagDescription">The flag is the word you get <br>after you unscramble:</div>
         <h2 id="ctf">CTF {</h2>
         <h2 id="ctf1">}</h2>
