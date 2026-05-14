@@ -175,22 +175,23 @@
         }
 
         .noform1 {
-            width: auto;
-            height: auto;
-            background-color: transparent;
+            display: block;
+            width: 100%;
+            max-width: 100%;
             padding: 0;
             margin: 0;
+            background-color: transparent;
         }
 
         .noform1 input {
-            width: 370px;
+            width: 100%;
             max-width: 100%;
-            padding: 16px;
-            font-size: 20px;
+            padding: 14px;
+            font-size: 18px;
             border: 1px solid #ccc;
             border-radius: 3px;
             font-family: inherit;
-            margin: 20px auto;
+            margin: 20px 0;
             display: block;
             box-sizing: border-box;
             background-color: #dedeff;
@@ -389,8 +390,14 @@
         }
 
         #profile {
-            width:300px;
+            width:240px;
             margin: 1px;
+        }
+
+        @media screen and (max-width: 650px) {
+            #profile {
+                width: 180px;
+            }
         }
     </style>
 </head>
