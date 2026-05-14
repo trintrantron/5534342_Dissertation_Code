@@ -24,7 +24,7 @@
             background-color: #9391ff;
             display: flex;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: space-between;
             gap: clamp(1rem, 2vw, 2rem);
             position: fixed;
             top: 0;
@@ -36,7 +36,7 @@
         }
 
         .banner .noform {
-            margin-left: auto;
+            margin: 0;
         }
 
         .row {
@@ -75,6 +75,7 @@
         }
 
         .options:hover {
+            background-color: #fc9432;
             transform: scale(1.03);
         }
 
@@ -136,13 +137,22 @@
         }
 
         .logout {
-            width: clamp(120px, 15vw, 180px);
-            padding: clamp(0.65rem, 1.2vw, 0.9rem);
+            width: 160px;
+            height: 60px;
+            position: absolute;
+            right: 30px;
+            top: 20px;
             background-color: #dedeff;
-            color: #000;
-            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-            border: clamp(2px, 0.25vw, 4px) solid #000;
-            border-radius: clamp(8px, 1vw, 12px);
+            color: #000000;
+            font-size: 20px;
+            border: 5px solid #000000;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.25s ease;
+        }
+
+        .logout:hover {
+            background-color: #fc9432;
         }
 
         #bannerLogo {
@@ -195,8 +205,8 @@
         <div class="column">
             <br><br><form action="/create_class" method ="POST">
                 <button class="options" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='gooseHeadNoBackground.svg') }}"><span class="buttonTitle">Create Class</span><span class="buttonDescription">Click here to create a class before you start a game!</span></button>
-            </form><br><br><br><br><br><br><br><br><br><br>
-            <h1>---------------------------------------------</h1>
+            </form><br><br>
+            <h1>-----------------------------------------</h1>
             <div class="title">How does it work?</div><br>
             <h2>When creating a new class there are two options: enter student names<span class="orange"> manually</span> or enter class size to<span class="orange"> generate </span>names</h2>
             <h2>Either way, you will be provided a <span class="orange">username</span> and <span class="orange">passowrd</span> for each student.</h2>
@@ -206,9 +216,9 @@
 
         <div class="column">
             <br><br><form action="/view_classes" method ="POST">
-                <button class="options" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='threeGoosesImg.png') }}"><span class="buttonTitle">View Classes</span><br><br><span class="buttonDescription">Click here to view and edit any classes you have already made!</span></button>
-            </form><br><br><br><br><br><br><br><br><br><br>
-            <h1>---------------------------------------------</h1>
+                <button class="options" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='threeGoosesImg.png') }}"><span class="buttonTitle">View Classes</span><span class="buttonDescription">Click here to view and edit any classes you have already made!</span></button>
+            </form><br><br>
+            <h1>-----------------------------------------</h1>
             <div class="title">How does it work?</div><br>
             <h2>Once you've added classes, those classes will show up here so you can view them! </h2>
             <h2>Here you can <span class="purple">add</span> or <span class="purple">remove</span> students from different classes as needed.</h2>
@@ -217,9 +227,9 @@
 
         <div class="column">
             <br><br><form action="/start_game" method ="POST">
-                <button class="options" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='haveAQuackNoTitle.svg') }}"><span class="buttonTitle">Start Game</span><br><br><span class="buttonDescription">Click here to select a class to play with and start a game!</span></button>
-            </form><br><br><br><br><br><br><br><br><br><br>
-            <h1>---------------------------------------------</h1>
+                <button class="options" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='haveAQuackNoTitle.svg') }}"><span class="buttonTitle">Start Game</span><span class="buttonDescription">Click here to select a class to play with and start a game!</span></button>
+            </form><br><br>
+            <h1>-----------------------------------------</h1>
             <div class="title">How does it work?</div><br>
             <h2>Once you start a game, any students in the class selected will <span class="orange">automatically</span> be added when they log in!</h2>
             <h2>Just wait until you have the right number of students in the game before clicking "<span class="orange">Start CTF!</span>"</h2>
