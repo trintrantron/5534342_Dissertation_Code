@@ -318,7 +318,7 @@
         }
 
         .login {
-            width: clamp(320px, 55vw, 520px);
+            width: clamp(280px, 75vw, 520px);
             max-width: 520px;
             margin-top: 20px;
             padding: 30px;
@@ -327,6 +327,34 @@
             left: 50%;
             transform: translate(-50%, -50%);
             position: fixed;
+        }
+
+        .logout {
+            width: 160px;
+            height: 60px;
+            position: absolute;
+            right: 30px;
+            top: 20px;
+            background-color: #dedeff;
+            color: #000000;
+            font-size: 20px;
+            border: 5px solid #000000;
+        }
+
+        @media screen and (max-width: 600px) {
+            .login {
+                width: clamp(260px, 90vw, 480px);
+                top: calc(100px + 1.5rem);
+                transform: translateX(-50%);
+            }
+
+            .logout {
+                right: 10px;
+                top: 10px;
+                width: 140px;
+                height: 50px;
+                font-size: 18px;
+            }
         }
 
         #profile {
