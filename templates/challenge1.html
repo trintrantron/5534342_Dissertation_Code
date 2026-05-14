@@ -35,11 +35,12 @@
 
         form {
             background-color: #fff;
-            padding: 30px;
-            height: 350px;
+            padding: 24px;
             border-radius: 15px;
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-            width: 400px;
+            width: min(420px, 90vw);
+            max-width: 420px;
+            box-sizing: border-box;
             margin-bottom: 130px;
         }
 
@@ -107,20 +108,20 @@
             display: block;
             margin: 20px auto;
             max-width: 100%;
+            width: 100%;
+            box-sizing: border-box;
         }
         
         input {
-            width: clamp(260px, 60vw, 420px);
-            padding: 16px;
-            font-size: 20px;
+            padding: 14px;
+            font-size: 18px;
             border: 1px solid #ccc;
             border-radius: 3px;
             font-family: inherit;
         }
         
         button {
-            width: clamp(260px, 60vw, 420px);
-            padding: 15px;
+            padding: 14px;
             border: 1px solid #ccc;
             border-radius: 5px;
             font-family: inherit;
@@ -129,7 +130,7 @@
             color: #fff;
             cursor: pointer;
             font-weight: bold;
-            font-size: 22px;
+            font-size: 20px;
         }
         
         button:hover {
@@ -318,12 +319,12 @@
         }
 
         .login {
-            width: clamp(280px, 60vw, 420px);
-            max-width: 420px;
+            width: min(360px, 85vw);
+            max-width: 360px;
             margin-top: 20px;
-            padding: 30px;
+            padding: 20px;
             height: auto;
-            top: 50%;
+            top: 55%;
             left: 50%;
             transform: translate(-50%, -50%);
             position: fixed;
@@ -343,9 +344,26 @@
 
         @media screen and (max-width: 600px) {
             .login {
-                width: clamp(260px, 90vw, 420px);
+                width: min(320px, 90vw);
                 top: calc(100px + 1.5rem);
+                padding: 16px;
                 transform: translateX(-50%);
+            }
+
+            .login h2 {
+                font-size: 20px;
+            }
+
+            .logout {
+                right: 15px;
+                top: 15px;
+                width: 140px;
+                height: 50px;
+                font-size: 18px;
+            }
+
+            #profile {
+                width: 220px;
             }
         }
 
