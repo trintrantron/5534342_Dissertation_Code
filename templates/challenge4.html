@@ -323,12 +323,45 @@
         }
 
         .login {
+            width: min(360px, 85vw);
+            max-width: 360px;
             margin-top: 20px;
-            height: 600px;
-            top: 50%;
+            padding: 20px;
+            height: auto;
+            top: 55%;
             left: 50%;
             transform: translate(-50%, -50%);
             position: fixed;
+        }
+
+        .login input,
+        .login button {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .login input {
+            padding: 14px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-family: inherit;
+        }
+        
+        .login button {
+            padding: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: inherit;
+            align-items: center;
+            background-color: #9391ff;
+            color: #fff;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 20px;
         }
 
         @media screen and (max-width: 650px) {
