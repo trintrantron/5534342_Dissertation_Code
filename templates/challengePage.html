@@ -32,24 +32,28 @@
             min-height: 100vh;
         }
 
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: clamp(0.75rem, 1.5vw, 1.25rem);
+            padding-top: clamp(5.5rem, 7.5vh, 7rem);
+            text-align: center;
+        }
+
         .column {
-            float: left;
-            text-align: center;
-            place-items: center;
-            width: 32%;
-            padding: 10px;
+            flex: 1 1 280px;
+            min-width: 260px;
+            max-width: clamp(340px, 36vw, 520px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: clamp(0.75rem, 1vw, 1rem);
         }
 
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-            text-align: center;
-        }
-
-        @media screen and (max-width: 600px) {
+        @media screen and (max-width: 768px) {
             .column {
-                width: 100%;
+                min-width: 100%;
             }
         }
 
@@ -168,19 +172,30 @@
         }
 
         .options {
+            width: 100%;
             background-color: #9391ff;
-            padding: 30px;
-            border-radius: 10px;
-            align-self: center;
+            padding: clamp(1rem, 2vw, 1.5rem);
+            border-radius: clamp(10px, 1.5vw, 18px);
             box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: clamp(0.75rem, 1.5vw, 1rem);
+            border: none;
+            cursor: pointer;
+            color: #fff;
+            text-align: center;
         }
 
         .options:hover {
-            scale: 1.05;
+            background-color: #fc9432;
+            transform: scale(1.03);
         }
 
         #buttonSticker {
-            width: 350px;
+            width: 100%;
+            max-width: clamp(220px, 28vw, 340px);
+            height: auto;
         }
 
         .score {
@@ -257,30 +272,30 @@
     
     <div class="row">
         <div class="column">
-            <br><br><form action="/practice" method ="POST">
-                <button class="options {% if flags[0] %}completed{% endif %}" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='gooseHeadNoBackground.svg') }}"><span class="buttonTitle">Practice!</span><br><br><span class="buttonDescription">This practice challenge is worth 10 points and is your chance to practice entering a flag!</span></button>
+            <form action="/practice" method ="POST">
+                <button class="options {% if flags[0] %}completed{% endif %}" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='gooseHeadNoBackground.svg') }}"><span class="buttonTitle">Practice!</span><span class="buttonDescription">This practice challenge is worth 10 points and is your chance to practice entering a flag!</span></button>
             </form>
-            <br><br><br><br><br><br><br><br><br><br><br><br><form action="/challenge_3" method ="POST">
-                <button class="options {% if flags[3] %}completed{% endif %}" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='threeGoosesImg.png') }}"><span class="buttonTitle">Challenge 3</span><br><br><span class="buttonDescription">This challenge is an introduction to digital forensics, which is like detective work on computers!<br><br></span></button>
+            <form action="/challenge_3" method ="POST">
+                <button class="options {% if flags[3] %}completed{% endif %}" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='threeGoosesImg.png') }}"><span class="buttonTitle">Challenge 3</span><span class="buttonDescription">This challenge is an introduction to digital forensics, which is like detective work on computers!</span></button>
             </form>
         </div>
 
         <div class="column">
-            <br><br><form action="/challenge_1" method ="POST">
-                <button class="options {% if flags[1] %}completed{% endif %}" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='threeGoosesImg.png') }}"><span class="buttonTitle">Challenge 1</span><br><br><span class="buttonDescription">This challenge is an introduction to cracking passwords!<br><br></span></button>
+            <form action="/challenge_1" method ="POST">
+                <button class="options {% if flags[1] %}completed{% endif %}" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='threeGoosesImg.png') }}"><span class="buttonTitle">Challenge 1</span><span class="buttonDescription">This challenge is an introduction to cracking passwords!</span></button>
             </form>
-            <br><br><br><br><br><br><br><br><br><br><br><br><form action="/challenge_4" method ="POST">
-                <button class="options {% if flags[4] %}completed{% endif %}" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='haveAQuackNoTitle.svg') }}"><span class="buttonTitle">Challenge 4</span><br><br><span class="buttonDescription">This challenge is an introduction to open sorurce intelligence, which involves exploiting publically available information!</span></button>
+            <form action="/challenge_4" method ="POST">
+                <button class="options {% if flags[4] %}completed{% endif %}" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='haveAQuackNoTitle.svg') }}"><span class="buttonTitle">Challenge 4</span><span class="buttonDescription">This challenge is an introduction to open source intelligence, which involves exploiting publicly available information!</span></button>
             </form>
-            <br><br><br><a href="/tutorial">Return to tutorial</a>
+            <a href="/tutorial">Return to tutorial</a>
         </div>
 
         <div class="column">
-            <br><br><form action="/challenge_2" method ="POST">
-                <button class="options {% if flags[2] %}completed{% endif %}" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='haveAQuackNoTitle.svg') }}"><span class="buttonTitle">Challenge 2</span><br><br><span class="buttonDescription">This challenge is an introduction to cryptography, which is the science of secret codes to hide information!</span></button>
+            <form action="/challenge_2" method ="POST">
+                <button class="options {% if flags[2] %}completed{% endif %}" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='haveAQuackNoTitle.svg') }}"><span class="buttonTitle">Challenge 2</span><span class="buttonDescription">This challenge is an introduction to cryptography, which is the science of secret codes to hide information!</span></button>
             </form>
-            <br><br><br><br><br><br><br><br><br><br><br><br><form action="/challenge_5" method ="POST">
-                <button class="options {% if flags[5] %}completed{% endif %}" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='threeGoosesImg.png') }}"><span class="buttonTitle">Challenge 5</span><br><br><span class="buttonDescription">This challenge is an introduction to network analysis, which is the interception and investigation of data sent between devices!</span></button>
+            <form action="/challenge_5" method ="POST">
+                <button class="options {% if flags[5] %}completed{% endif %}" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='threeGoosesImg.png') }}"><span class="buttonTitle">Challenge 5</span><span class="buttonDescription">This challenge is an introduction to network analysis, which is the interception and investigation of data sent between devices!</span></button>
             </form>
         </div>
     </div>
