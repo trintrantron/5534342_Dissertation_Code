@@ -14,34 +14,13 @@
             min-height: 100vh;
         }
 
-        .column {
-            float: left;
-            text-align: center;
-            place-items: center;
-            width: 32%;
-            padding: 10px;
-            margin-top: 50px;
-        }
-
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-            text-align: center;
-        }
-
-        @media screen and (max-width: 600px) {
-            .column {
-                width: 100%;
-            }
-        }
-
         form {
             background-color: #fff;
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
             width: 400px;
+            margin: 0 auto;
         }
 
         #finishButton {
@@ -304,25 +283,25 @@
         </form>
     </div>
 
-    <div class="row">
-        <div class="column">
-            <img id="logo" src="{{ url_for('static', filename='threeGoosesImg.png') }}">
-        </div>
-
-        <div class="column">
-            <div>
-                <h1>Leaderboard:</h1>
-                <ul id="leaderboard"></ul>
-                <br><br><br><br>
-                <form id="finishButton" method="post">
-                    <button onclick="endGame()" type="button">End game!</button>
-                </form>
-            </div>
-        </div>
-        <div class="column">
-            <img id="logo" src="{{ url_for('static', filename='threeGoosesImgFlip.png') }}">
-        </div>
+    <div class="left">
+        <img id="logo" src="{{ url_for('static', filename='threeGoosesImg.png') }}">
     </div>
+
+
+    <div>
+        <h1>Leaderboard:</h1>
+        <ul id="leaderboard"></ul>
+        <br><br><br><br>
+        <form id="finishButton" method="post">
+            <button onclick="endGame()" type="button">End game!</button>
+        </form>
+    </div>
+
+
+    <div class="right">
+        <img id="logo" src="{{ url_for('static', filename='threeGoosesImgFlip.png') }}">
+    </div>
+
     <script>
         const socket = io();
 

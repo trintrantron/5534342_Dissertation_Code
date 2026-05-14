@@ -13,27 +13,6 @@
             min-height: 100vh;
         }
 
-        .column {
-            float: left;
-            text-align: center;
-            place-items: center;
-            width: 32%;
-            padding: 10px;
-        }
-
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-            text-align: center;
-        }
-
-        @media screen and (max-width: 600px) {
-            .column {
-                width: 100%;
-            }
-        }
-
         form {
             background-color: #fff;
             padding: 30px;
@@ -41,6 +20,7 @@
             border-radius: 15px;
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
             width: 400px;
+            margin: 0 auto;
         }
 
         .banner {
@@ -266,25 +246,23 @@
     </div>
 
 
-    <div class="row">
-        <div class="column">
-            <br><br><img id="logo" src="{{ url_for('static', filename='gooseImg.png') }}">
-        </div>
+    <div class="left">
+        <img id="logo" src="{{ url_for('static', filename='gooseImg.png') }}">
+    </div>
 
-        <div class="column">
-            <div><br><br>
-                <form action="/generate_class_names" method="post">
-                    <h2>Please enter the number of students in the class:</h2>
-                    <input type="number" max="60" id="class_size" name="class_size" placeholder="Class size" required>
-                    <button type="submit">Confirm</button>
-                </form>
-            </div>
-            <br><a href="/build_class">Back</a>
-        </div>
 
-        <div class="column">
-            <br><br><img id="logo" src="{{ url_for('static', filename='gooseImgFlip.png') }}">
-        </div>
+    <div><br><br>
+        <form action="/generate_class_names" method="post">
+            <h2>Please enter the number of students in the class:</h2>
+            <input type="number" max="60" id="class_size" name="class_size" placeholder="Class size" required>
+            <button type="submit">Confirm</button>
+        </form>
+    </div>
+    <br><a href="/build_class">Back</a>
+
+
+    <div class="left">
+        <img id="logo" src="{{ url_for('static', filename='gooseImg.png') }}">
     </div>
 
 

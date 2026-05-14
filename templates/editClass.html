@@ -13,34 +13,13 @@
             min-height: 100vh;
         }
 
-        .column {
-            float: left;
-            text-align: center;
-            place-items: center;
-            width: 32%;
-            padding: 10px;
-            margin-top: 50px;
-        }
-
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-            text-align: center;
-        }
-
-        @media screen and (max-width: 600px) {
-            .column {
-                width: 100%;
-            }
-        }
-
         form {
             background-color: #fff;
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
             width: 400px;
+            margin: 0 auto;
         }
 
         #finishButton {
@@ -295,43 +274,42 @@
         </form>
     </div>
 
-    <div class="row">
-        <div class="column">
-            <img id="logo" src="{{ url_for('static', filename='gooseImg.png') }}">
-        </div>
+    <div class="left">
+        <img id="logo" src="{{ url_for('static', filename='gooseImg.png') }}">
+    </div>
 
-        <div class="column">
-            <div>
-                <form action="/manually_add_students_1" id="studentInput" method="post">
-                    <h2>Student Name:</h2>
-                    <form class="studentInput" action="/manually_add_students_1" method="post">
-                        <input class="hidden" name="class_id" value="{{class_id}}">
-                        <input class="inputClass" type="text" id="name" name="name" placeholder="Student name" required>
-                        <button type="submit">Add Student</button>
-                    </form>
-                    <label>{{message}}<label>                    
-                </form>
-                </form>
-                    <div class="grid">
-                        {% for student in class_temp %}
-                            <div>
-                                <h2 class="student">{{student.name}}</h1>
-                                <form class="noformstudent" action="/delete_student_edit" method="post">
-                                    <input class="hidden" name="studentName" value="{{student.name}}">
-                                    <button id="delete" type="submit">Delete</button>
-                                </form>
-                            </div>
-                        {% endfor %}
+
+    <div>
+        <form action="/manually_add_students_1" id="studentInput" method="post">
+            <h2>Student Name:</h2>
+            <form class="studentInput" action="/manually_add_students_1" method="post">
+                <input class="hidden" name="class_id" value="{{class_id}}">
+                <input class="inputClass" type="text" id="name" name="name" placeholder="Student name" required>
+                <button type="submit">Add Student</button>
+            </form>
+            <label>{{message}}<label>                    
+        </form>
+        </form>
+            <div class="grid">
+                {% for student in class_temp %}
+                    <div>
+                        <h2 class="student">{{student.name}}</h1>
+                        <form class="noformstudent" action="/delete_student_edit" method="post">
+                            <input class="hidden" name="studentName" value="{{student.name}}">
+                            <button id="delete" type="submit">Delete</button>
+                        </form>
                     </div>
-                </form><br><br><br><br>
-                <form id="finishButton" action="/confirm_enter_students_1" method="post">
-                    <button type="submit">Finish</button>
-                </form>
+                {% endfor %}
             </div>
-        </div>
-        <div class="column">
-            <img id="logo" src="{{ url_for('static', filename='gooseImgFlip.png') }}">
-        </div>
+        </form><br><br><br><br>
+        <form id="finishButton" action="/confirm_enter_students_1" method="post">
+            <button type="submit">Finish</button>
+        </form>
+    </div>
+
+
+    <div class="right">
+        <img id="logo" src="{{ url_for('static', filename='gooseImgFlip.png') }}">
     </div>
 
 </body>
