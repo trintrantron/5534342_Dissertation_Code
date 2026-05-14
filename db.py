@@ -345,7 +345,7 @@ class Task:
         salt = bcrypt.gensalt()
         bpass = password.encode('utf-8')
         hash = bcrypt.hashpw(bpass, salt)
-        new_student = db.Students(name, hash, salt, class_id)
+        new_student = db.Students(name, hash, salt, class_id, password)
         session.add(new_student)
         session.commit()
         print(new_student.user_id, new_student.name, new_student.class_id, new_student.password, new_student.score, new_student.user_type)
