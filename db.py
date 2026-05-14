@@ -440,7 +440,7 @@ class Task:
                 bpass = password.encode('utf-8')
                 hash = bcrypt.hashpw(bpass, salt)
                 score = 0
-                student = db.Students(username, hash, salt, class_id, score)
+                student = db.Students(username, hash, salt, class_id, score, password)
                 session.add(student)
                 session.commit()
                 return(0) # Success

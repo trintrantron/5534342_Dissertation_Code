@@ -11,27 +11,7 @@
             padding: 100px;
             background-color: #dedeff;
             min-height: 100vh;
-        }
-
-        .column {
-            float: left;
             text-align: center;
-            place-items: center;
-            width: 32%;
-            padding: 10px;
-        }
-
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-            text-align: center;
-        }
-
-        @media screen and (max-width: 600px) {
-            .column {
-                width: 100%;
-            }
         }
 
         form {
@@ -221,6 +201,28 @@
             margin-bottom: 20px;
         }
 
+        .right {
+            margin-top: 100px;
+            position: absolute;
+            position: fixed;
+            right: 0px;
+            top: 100px;
+            height: 100%;
+            width: 430px;
+            padding:20px
+        }
+
+        .left {
+            margin-top: 100px;
+            position: absolute;
+            position: fixed;
+            left: 0px;
+            top: 100px;
+            height: 100%;
+            width: 430px;
+            padding:20px
+        }
+
     </style>
 </head>
 
@@ -233,27 +235,24 @@
         </form>
     </div>
 
-    <div class="row">
-        <div class="column">
-            <br><br><img id="logo" src="{{ url_for('static', filename='gooseImg.png') }}">
-        </div>
-
-        <div class="column">
-            <div><br><br>
-                <form action="/create_class_confirm" method="post">
-                    <h2>Please enter the class name:</h2>
-                    <input type="text" id="class_name" name="class_name" placeholder="Class name" required>
-                    <button type="submit">Confirm</button>
-                    <label>{{message}}<label>
-                </form>
-            </div>
-            <br><a href="/teacher_homepage">Back to dashboard</a>
-        </div>
-
-        <div class="column">
-            <br><br><img id="logo" src="{{ url_for('static', filename='gooseImgFlip.png') }}">
-        </div>
+    <div class="left">
+        <img id="logo" src="{{ url_for('static', filename='gooseImg.png') }}">
     </div>
+
+    <div><br><br>
+        <form action="/create_class_confirm" method="post">
+            <h2>Please enter the class name:</h2>
+            <input type="text" id="class_name" name="class_name" placeholder="Class name" required>
+            <button type="submit">Confirm</button>
+            <label>{{message}}<label>
+        </form>
+    </div>
+    <br><a href="/teacher_homepage">Back to dashboard</a>
+
+    <div class="left">
+        <img id="logo" src="{{ url_for('static', filename='gooseImg.png') }}">
+    </div>
+
 
 </body>
 </html>
