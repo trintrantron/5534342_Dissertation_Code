@@ -36,11 +36,12 @@
 
         form {
             background-color: #fff;
-            padding: 30px;
-            height: 350px;
+            padding: 24px;
             border-radius: 15px;
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-            width: 400px;
+            width: min(420px, 90vw);
+            max-width: 420px;
+            box-sizing: border-box;
             margin-bottom: 130px;
         }
 
@@ -106,6 +107,9 @@
         button {
             display: block;
             margin: 20px 0;
+            max-width: 100%;
+            width: 100%;
+            box-sizing: border-box;
         }
         
         input {
@@ -214,7 +218,7 @@
 
         .taskDescription {
             text-align: center;
-            font-size: 30px;
+            font-size: 27px;
             font-family: "Raleway", sans-serif;
             color: #000000;
             font-weight: bold;
@@ -267,15 +271,18 @@
         }
 
         #flag {
-            position: absolute;
-            left: 216px;
-            bottom: 155px;
-            width: 150px;
-            height: 15px;
+            position: fixed;
+            left: 217px;
+            bottom: 39px;
+            width: 190px;
+            padding: 10px 12px;
+            font-size: 20px;
+            font-family: inherit;
             background-color: #dedeff;
             color: #000000;
-            font-size: 20px;
             border: 5px solid #000000;
+            border-radius: 3px;
+            box-sizing: border-box;
         }
 
         #ctf {
@@ -324,9 +331,37 @@
             position: fixed;
         }
 
+        @media screen and (max-width: 650px) {
+            .login {
+                width: min(320px, 90vw);
+                top: calc(100px + 4rem);
+                padding: 10px;
+                transform: translateX(-50%);
+            }
+
+            .login h2 {
+                font-size: 18px;
+            }
+
+            #profile {
+                width: 100px;
+            }
+
+            .login input,
+            .login button {
+                margin: 15px auto;
+            }
+        }
+
         #profile {
-            width:300px;
+            width:220px;
             margin: 1px;
+        }
+
+        @media screen and (max-width: 650px) {
+            #profile {
+                width: 180px;
+            }
         }
 
     </style>
@@ -344,10 +379,9 @@
         <div class="menu">
             <a href="/challenge_page">Return to challenge page</a>
             <h1><u>Challenge brief:</u></h1>
-            <div class="taskDescription">You are trying to break into Nabil's computer...</div>
+            <div class="taskDescription">You are trying to break into Nabil's computer using his instagram...</div>
             <div class="taskDescription">His password is his dog's name followed by the year he was born:</div>
             <img id="profile" src="{{ url_for('static', filename='challenge4Text.png') }}">
-            <br><br><div class="taskDescription">Use Nabil's social media to work out his password!</div>
             <div class="taskDescription" id="flagDescription">The flag is Nabil's password:</div>
             <h2 id="ctf">CTF {</h2>
             <h2 id="ctf1">}</h2>
