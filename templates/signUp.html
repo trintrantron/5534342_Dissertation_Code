@@ -6,236 +6,235 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cyber Quack</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 100px;
-            background-color: #dedeff;
+        * {
+            box-sizing: border-box;
+        }
+
+        body.page-signup {
+            margin: 0;
             min-height: 100vh;
-            align-items: center;
-            text-align: center;
-        }
-
-        .column {
-            float: left;
-            text-align: center;
-            place-items: center;
-            width: 32%;
-            padding: 10px;
-        }
-
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-            text-align: center;
-        }
-
-        @media screen and (max-width: 600px) {
-            .column {
-                width: 100%;
-            }
-        }
-
-        form {
-            margin-top: 70px;
-            background-color: #fff;
-            padding-left: 40px;
-            padding-bottom: 40px;
-            padding-right: 40px;
-            padding-top: 1px;
-            border-radius: 10px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-            width: 400px;
+            font-family: Arial, sans-serif;
+            background-color: #dedeff;
+            padding: clamp(0.75rem, 2vw, 3rem);
         }
 
         .banner {
             width: 100%;
-            height: 100px;
-            background-color: #9391ff; 
+            min-height: clamp(70px, 9vh, 90px);
+            background-color: #9391ff;
             display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: clamp(1rem, 2vw, 2rem);
             position: fixed;
             top: 0;
             left: 0;
-            border-bottom:  5px solid #000000;
+            right: 0;
+            border-bottom: clamp(3px, 0.4vw, 6px) solid #000;
             z-index: 999;
+            padding: 0 clamp(1rem, 3vw, 2rem);
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: clamp(1rem, 1.5vw, 1.5rem);
+            padding-top: clamp(6rem, 8vh, 7.5rem);
+            text-align: center;
+        }
+
+        .column {
+            flex: 1 1 280px;
+            min-width: 260px;
+            max-width: clamp(340px, 36vw, 520px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: clamp(0.5rem, 1vw, 0.75rem);
+        }
+
+        form {
+            background-color: #fff;
+            padding: clamp(1rem, 2vw, 1.75rem);
+            border-radius: clamp(10px, 1.5vw, 18px);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: clamp(280px, 90vw, 420px);
+            margin: clamp(1.5rem, 4vh, 3rem) auto;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-family: "Raleway", sans-serif;
+            color: #000;
+            font-weight: bold;
+            margin-bottom: clamp(0.75rem, 1.5vw, 1.5rem);
+            line-height: 1.2;
         }
 
         h1 {
             text-align: left;
-            font-size: 50px;
-            font-family: "Raleway", sans-serif;
-            color: #000000;
-            font-weight: bold;
-            margin-bottom: 30px;
+            font-size: clamp(1.75rem, 3.5vw, 3rem);
         }
-        
+
         h2 {
             text-align: left;
-            font-size: 24px;
-            font-family: "Raleway", sans-serif;
-            color: #000000;
-            font-weight: bold;
-            margin-bottom: 30px;
+            font-size: clamp(1rem, 2vw, 1.5rem);
         }
 
         h3 {
             text-align: center;
-            font-size: 24px;
-            font-family: "Raleway", sans-serif;
-            color: #000000;
-            font-weight: bold;
-            margin-bottom: 30px;
+            font-size: clamp(1rem, 2vw, 1.5rem);
         }
 
         h4 {
             text-align: left;
-            font-size: 40px;
-            font-family: "Raleway", sans-serif;
-            color: #000000;
-            font-weight: bold;
-            margin-bottom: 30px;
+            font-size: clamp(1.35rem, 2.5vw, 2.5rem);
         }
 
         h5 {
             text-align: left;
-            font-size: 20px;
+            font-size: clamp(0.95rem, 1.7vw, 1.2rem);
+        }
+
+        .purple,
+        .orange {
+            display: inline;
             font-family: "Raleway", sans-serif;
-            color: #000000;
             font-weight: bold;
-            margin-bottom: 30px;
+            font-size: clamp(1rem, 2vw, 1.4rem);
         }
 
         .purple {
-            text-align: center;
-            font-size: 24px;
-            font-family: "Raleway", sans-serif;
             color: #635dff;
-            font-weight: bold;
-            margin-bottom: 30px;
         }
 
         .orange {
-            text-align: center;
-            font-size: 24px;
-            font-family: "Raleway", sans-serif;
             color: #fc9432;
-            font-weight: bold;
-            margin-bottom: 30px;
         }
-        
+
         label {
             text-align: center;
-            font-size: 14px;
+            font-size: clamp(0.9rem, 1.7vw, 1rem);
             font-family: inherit;
             color: #ff0000;
             font-weight: bold;
             display: block;
-            margin-top: 10px;
+            margin-top: clamp(0.5rem, 1vh, 1rem);
         }
-        
+
         a {
             text-decoration: none;
             font-family: Arial, sans-serif;
-            font-size: 18px;
+            font-size: clamp(0.9rem, 1.7vw, 1.1rem);
             color: #262626;
             display: block;
             text-align: center;
-            margin-top: 15px;
+            margin-top: clamp(0.75rem, 1.5vh, 1rem);
         }
-        
+
         input,
-        button {
-            display: block;
-            margin: 20px 0;
-        }
-        
-        input {
-            width: 370px;
-            padding: 16px;
-            font-size: 20px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            font-family: inherit;
-            margin: 1 auto;
-        }
-        
-        button {
-            width: 405px;
-            padding: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-family: inherit;
-            align-items: center;
-            background-color: #9391ff;
-            color: #fff;
-            cursor: pointer;
-            margin: 0 auto;
-            font-weight: bold;
-            font-size: 22px;
-        }
-        
-        button:hover {
-            background-color: #fc9432;
-        }
-        
-        #bannerText {
-            position: center;
-            height: 98px;
-        }
-
-        #bannerLogo {
-            height: 100px;
-            position: relative;
-            right: -5px;
-        }
-
+        button,
         .signupbutton {
-            width: 220px;
-            height: 70px;
-            padding: 15px;
-            align-items: center;
-            border-radius: 5px;
+            width: 100%;
+            max-width: 100%;
+            padding: clamp(0.75rem, 1.4vw, 1rem);
+            font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+            border-radius: clamp(5px, 0.8vw, 8px);
+            border: 1px solid #ccc;
             font-family: inherit;
-            align-items: center;
-            background-color: #9391ff;
-            color: #fff;
-            cursor: pointer;
-            margin: 0 auto;
-            font-family: "Raleway", sans-serif;
-            font-weight: bold;
-            font-size: 28px;
+            box-sizing: border-box;
+            margin: clamp(0.75rem, 1.5vh, 1rem) auto;
+            display: block;
         }
 
+        button,
+        .signupbutton {
+            background-color: #9391ff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.25s ease, transform 0.15s ease;
+        }
+
+        button:hover,
         .signupbutton:hover {
             background-color: #fc9432;
         }
 
-        #signupForm {
-            background-color: #fff;
-            padding: 30px;
-            height: 190px;
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            margin-bottom: 130px;
+        button:active,
+        .signupbutton:active {
+            transform: scale(0.98);
+        }
+
+        #bannerText,
+        #bannerLogo {
+            max-height: clamp(45px, 8vh, 85px);
+            width: auto;
         }
 
         #logo {
             width: 100%;
+            max-width: clamp(240px, 55vw, 420px);
         }
 
         #littleGoose {
-            width: 15%;
+            width: clamp(50px, 12vw, 100px);
+            height: auto;
+            margin: clamp(0.5rem, 1vh, 1rem) 0;
         }
 
-        a:hover {
-            color: #9391ff;
+        @media screen and (max-width: 1024px) {
+            .row {
+                flex-direction: column;
+                gap: clamp(1rem, 1.5vw, 1.5rem);
+                padding-top: clamp(5.5rem, 8vh, 6.5rem);
+            }
+
+            h1 {
+                font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+            }
+
+            h4 {
+                font-size: clamp(1.2rem, 2.3vw, 1.8rem);
+            }
         }
 
+        @media screen and (max-width: 768px) {
+            .banner {
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 0.75rem;
+                padding: clamp(0.75rem, 4vw, 1rem);
+                min-height: clamp(70px, 9vh, 85px);
+            }
+
+            .row {
+                padding-top: clamp(5rem, 7vh, 6.5rem);
+            }
+
+            form {
+                margin: clamp(1.5rem, 4vh, 2.5rem) auto;
+            }
+
+            input,
+            button,
+            .signupbutton {
+                font-size: clamp(0.9rem, 1.5vw, 1rem);
+                padding: clamp(0.65rem, 1vw, 0.9rem);
+            }
+        }
     </style>
 </head>
 
-<body>
+<body class="page-signup">
     <div class="banner">
         <img id="bannerLogo" src="{{ url_for('static', filename='trinTranTronLogoWithBorder.svg') }}">
         <img id="bannerText" src="{{ url_for('static', filename='trinTranTronPresents.svg') }}">
@@ -257,11 +256,9 @@
                     <h2 for="confirm_password">Confirm Password:</h2>
                     <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm password" required>
 
-                    <form action="/signup_confirm" method ="post">
                         <button id="create_user" type="submit">Create user</button>
-                    </form>
-
-                    <label class="errorlabel">{{message}}<label>
+                    
+                    <label class="errorlabel">{{message}}</label>
                 </form>
                 <a href="/">Return to login</a>
                 <h1>----------------------------</h1>
