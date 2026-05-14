@@ -24,7 +24,7 @@
             background-color: #9391ff;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-start;
             gap: clamp(1rem, 2vw, 2rem);
             position: fixed;
             top: 0;
@@ -33,6 +33,10 @@
             border-bottom: clamp(3px, 0.4vw, 6px) solid #000;
             z-index: 999;
             padding: 0 clamp(1rem, 3vw, 2rem);
+        }
+
+        .banner .noform {
+            margin-left: auto;
         }
 
         .row {
@@ -76,26 +80,26 @@
 
         #buttonSticker {
             width: 100%;
-            max-width: clamp(160px, 24vw, 260px);
+            max-width: clamp(220px, 28vw, 340px);
             height: auto;
         }
 
         .buttonTitle {
             text-align: center;
-            font-size: clamp(1.75rem, 3vw, 2.4rem);
+            font-size: clamp(2rem, 3.5vw, 3rem);
             font-family: "Raleway", sans-serif;
             color: #ffffff;
             font-weight: bold;
-            margin-bottom: clamp(0.75rem, 1.5vw, 1rem);
+            margin-bottom: clamp(0.85rem, 1.5vw, 1.1rem);
         }
 
         .buttonDescription {
             text-align: center;
-            font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+            font-size: clamp(1.1rem, 2vw, 1.6rem);
             font-family: "Raleway", sans-serif;
             color: #000000;
             font-weight: bold;
-            margin-bottom: clamp(0.75rem, 1.5vw, 1rem);
+            margin-bottom: clamp(0.85rem, 1.5vw, 1.1rem);
         }
 
         h2 {
