@@ -276,6 +276,13 @@
             color: #ffffff;
         }
 
+        #ctf2 {
+            position: absolute;
+            position: fixed;
+            left: 190px;
+            bottom: 5px;
+        }
+
         #flagDescription {
             position: absolute;
             position: fixed;
@@ -348,6 +355,7 @@
         <form class="noform1" action="/flag_0" method="post">
             <input type="text" id="flag" name="flag" placeholder="Flag" required>
         </form>
+        <label id="ctf2">{{message1}}</label>
     </div>
     <img id="note" src="{{ url_for('static', filename='practiceImg.png') }}">
 
