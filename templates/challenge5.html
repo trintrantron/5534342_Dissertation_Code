@@ -330,7 +330,7 @@
         }
 
         #packet {
-            width: 700px;
+            width: 600px;
         }
 
         .packet:hover {
@@ -343,7 +343,7 @@
             right: 0px;
             top: 100px;
             font-family: "Raleway", sans-serif;
-            width: 300px;
+            width: 250px;
             height: 300px;
             margin:60px;
             color: #ffffff;
@@ -354,6 +354,7 @@
 
         #key {
             color: #ffffff;
+            font-size: 26px;
         }
 
         label {
@@ -382,7 +383,6 @@
         <a href="/challenge_page">Return to challenge page</a>
         <h1><u>Challenge brief:</u></h1>
         <div class="taskDescription">You've intercepted network traffic to find emails sent between Aditi and Henry...</div>
-        <div class="taskDescription">When information is sent between two devices it is sent in packets with lots of computer information.</div>
         <div class="taskDescription">Look through these packets to find the secret colour that Henry sent to Aditi.</div>
         <div class="taskDescription" id="flagDescription">The flag is the secret colour:</div>
         <h2 id="ctf">CTF {</h2>
@@ -396,27 +396,27 @@
         <button class="packet" type="submit">
             <img id="packet" src="{{ url_for('static', filename='packet1.png') }}">
         </button>
-    </form><br><br><br><br>
+    </form><br><br>
     <form class="noform" action="/packet_2" method ="POST">
         <button class="packet" type="submit">
             <img id="packet" src="{{ url_for('static', filename='packet2.png') }}">
         </button>
-    </form><br><br><br><br>
+    </form><br><br>
     <form class="noform" action="/packet_3" method ="POST">
         <button class="packet" type="submit">
             <img id="packet" src="{{ url_for('static', filename='packet3.png') }}">
         </button>
-    </form><br><br><br><br>
+    </form><br><br>
     <form class="noform" action="/packet_4" method ="POST">
         <button class="packet" type="submit">
             <img id="packet" src="{{ url_for('static', filename='packet4.png') }}">
         </button>
-    </form><br><br><br><br>
+    </form><br><br>
     <form class="noform" action="/packet_5" method ="POST">
         <button class="packet" type="submit">
             <img id="packet" src="{{ url_for('static', filename='packet5.png') }}">
         </button>
-    </form><br><br><br><br>
+    </form><br><br>
     <form class="noform" action="/packet_6" method ="POST">
         <button class="packet" type="submit">
             <img id="packet" src="{{ url_for('static', filename='packet6.png') }}">
