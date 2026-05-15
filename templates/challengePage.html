@@ -281,13 +281,13 @@
                 <button class="options {% if flags[0] %}completed{% endif %}" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='gooseHeadNoBackground.svg') }}"><span class="buttonTitle">Practice!</span><span class="buttonDescription">This practice challenge is worth 10 points and is your chance to practice entering a flag!</span></button>
             </form>
             <form action="/challenge_3" method ="POST">
-                <button class="options {% if flags[3] %}completed{% endif %}" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='threeGoosesImg.png') }}"><span class="buttonTitle">Challenge 3</span><span class="buttonDescription">This challenge is an introduction to digital forensics, which is like detective work on computers!</span></button>
+                <button class="options {% if flags[3] %}completed{% endif %}" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='threeGoosesImg.png') }}"><span class="buttonTitle">Challenge 3</span><span class="buttonDescription">This challenge is an introduction to digital forensics, which is like detective work on computers!<br><br></span></button>
             </form>
         </div>
 
         <div class="column">
             <form action="/challenge_1" method ="POST">
-                <button class="options {% if flags[1] %}completed{% endif %}" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='threeGoosesImg.png') }}"><span class="buttonTitle">Challenge 1</span><span class="buttonDescription">This challenge is an introduction to cracking passwords!</span></button>
+                <button class="options {% if flags[1] %}completed{% endif %}" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='threeGoosesImg.png') }}"><span class="buttonTitle">Challenge 1</span><span class="buttonDescription">This challenge is an introduction to cracking passwords!<br><br></span></button>
             </form>
             <form action="/challenge_4" method ="POST">
                 <button class="options {% if flags[4] %}completed{% endif %}" type="submit"><img id="buttonSticker" src="{{ url_for('static', filename='haveAQuackNoTitle.svg') }}"><span class="buttonTitle">Challenge 4</span><span class="buttonDescription">This challenge is an introduction to open source intelligence, which involves exploiting publicly available information!</span></button>
