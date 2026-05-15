@@ -301,3 +301,8 @@
 2026-05-12 12:26:03,107 - INFO - New user created: 'MrLeighton'
 2026-05-12 12:26:39,564 - INFO - Successful teacher login attempt: User 'MrLeighton' from IP 127.0.0.1
 2026-05-12 14:07:02,008 - INFO - Successful student login attempt: User '49' from IP 127.0.0.1
+2026-05-14 23:19:47,442 - WARNING - Failed login attempt: User 'MrsBalkwill' from IP 127.0.0.1
+2026-05-14 23:20:04,543 - INFO - New user created: 'MrBalkwill'
+2026-05-14 23:20:10,377 - INFO - Successful teacher login attempt: User 'MrBalkwill' from IP 127.0.0.1
+2026-05-14 23:20:59,374 - WARNING - Failed login attempt: User '122' from IP 127.0.0.1
+2026-05-14 23:21:06,992 - INFO - Successful student login attempt: User '112' from IP 127.0.0.1
