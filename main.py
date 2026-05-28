@@ -1,9 +1,3 @@
-# 635dff
-
-# <form id="finishButton" action="/confirm_enter_students" method="post">
-#     <button type="submit">Finish</button>
-# </form>
-
 from flask import Flask, render_template, request, redirect, url_for, session, send_file
 from flask_socketio import SocketIO, emit, join_room
 from db import Task
@@ -71,6 +65,25 @@ class RBACSystem:
 
 access = RBACSystem()
 access.add_resource("student_homepage", "s")
+access.add_resource("tutorial", "s")
+access.add_resource("challenge_page", "s")
+access.add_resource("tutorial_flag", "s")
+access.add_resource("practice", "s")
+access.add_resource("challenge_1", "s")
+access.add_resource("challenge_2", "s")
+access.add_resource("challenge_3", "s")
+access.add_resource("challenge_4", "s")
+access.add_resource("challenge_5", "s")
+access.add_resource("flag_0", "s")
+access.add_resource("flag_1", "s")
+access.add_resource("flag_2", "s")
+access.add_resource("flag_3", "s")
+access.add_resource("flag_4", "s")
+access.add_resource("flag_5", "s")
+access.add_resource("completed", "s")
+access.add_resource("student_results", "s")
+access.add_resource("logout_student", "s")
+
 
 access.add_resource("teacher_homepage", "t")
 access.add_resource("create_class", "t")
@@ -83,6 +96,15 @@ access.add_resource("generate_class_names", "t")
 access.add_resource("enter_names_success", "t")
 access.add_resource("view_classes", "t")
 access.add_resource("start_game", "t")
+access.add_resource("create_class_confirm", "t")
+access.add_resource("confirm_enter_students", "t")
+access.add_resource("edit_class", "t")
+access.add_resource("edit_class_repeat", "t")
+access.add_resource("confirm_enter_students_1", "t")
+access.add_resource("starting_game", "t")
+access.add_resource("leaderboard", "t")
+access.add_resource("results", "t")
+access.add_resource("logout", "t")
 
 @app.before_request
 def make_session_permanent():
@@ -203,7 +225,7 @@ def create_class_confirm():
     attempt = Task.add_class(class_name, username)
     if attempt[0] == True:
         if session.get("logged_in") == True:
-            if(access.grant_access(session["username"], "build_class")):
+            if(access.grant_access(session["username"], "create_class_confirm")):
                 session["class_id"] = attempt[1]
                 return redirect("/build_class")
             else:
@@ -250,17 +272,6 @@ def generate_class_names():
     else:
         return redirect("/")
 
-@app.route('/loading_page', methods=['GET', 'POST'])
-def loading_page():
-    if session.get("logged_in") == True:
-        if(access.grant_access(session["username"], "generate_names")):
-            username = session["username"]
-            return render_template('loadingPage.html', username=username)
-        else:
-            return redirect("/")
-    else:
-        return redirect("/")
-
 @app.route('/enter_names', methods=['GET', 'POST'])
 def enter_names():
     if not("message" in session):
@@ -298,7 +309,7 @@ def manually_add_students():
 @app.route('/confirm_enter_students', methods=['GET', 'POST'])
 def confirm_enter_students():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["username"], "enter_names_success")):
+        if(access.grant_access(session["username"], "confirm_enter_students")):
             username = session["username"]
             return render_template('enterNamesSuccess.html', username=username)
         else:
@@ -321,7 +332,7 @@ def delete_student():
     else:
         return redirect("/")
 
-@app.route('/view_classes', methods=['GET', 'POST']) # UNFINISHED!!!
+@app.route('/view_classes', methods=['GET', 'POST']) 
 def view_classes():    
     if session.get("logged_in") == True:
         if(access.grant_access(session["username"], "view_classes")):
@@ -345,7 +356,7 @@ def edit_class():
     session["class_id"] = class_id
     class_temp = Task.temp_students(class_id)
     if session.get("logged_in") == True:
-        if(access.grant_access(session["username"], "enter_names")):
+        if(access.grant_access(session["username"], "edit_class")):
             username = session["username"]
             return render_template('editClass.html', username=username, message=message, class_temp=class_temp, class_id=class_id)
         else:
@@ -365,7 +376,7 @@ def edit_class_repeat():
     class_id = session["class_id"]
     class_temp = Task.temp_students(class_id)
     if session.get("logged_in") == True:
-        if(access.grant_access(session["username"], "enter_names")):
+        if(access.grant_access(session["username"], "edit_class_repeat")):
             username = session["username"]
             return render_template('editClass.html', username=username, message=message, class_temp=class_temp, class_id=class_id)
         else:
@@ -391,7 +402,7 @@ def manually_add_students_1():
 @app.route('/confirm_enter_students_1', methods=['GET', 'POST'])
 def confirm_enter_students_1():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["username"], "enter_names_success")):
+        if(access.grant_access(session["username"], "confirm_enter_students_1")):
             return redirect("/view_classes")
         else:
             return redirect("/")
@@ -422,10 +433,10 @@ def delete_class():
     else:
         return redirect("/")
     
-@app.route('/start_game', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/start_game', methods=['GET', 'POST']) 
 def start_game():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["username"], "create_class")):
+        if(access.grant_access(session["username"], "start_game")):
             username = session["username"]
             class_temp = Task.get_classes(username)
             return render_template('startGame.html', username=username, class_temp=class_temp)
@@ -434,10 +445,10 @@ def start_game():
     else:
         return redirect("/")
 
-@app.route('/starting_game', methods=['GET', 'POST']) # THIS NEEDS A LIST OF STUDENTS IN THE ROOM!!! AND NEEDS TO UPDATE PERIODICALLY, AND SHOW NUMBER OF STUDENTS IN ROOM
+@app.route('/starting_game', methods=['GET', 'POST']) 
 def starting_game():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["username"], "create_class")):
+        if(access.grant_access(session["username"], "starting_game")):
             username = session["username"]
             print(username)
             class_id = request.form.get('classID')
@@ -448,10 +459,10 @@ def starting_game():
     else:
         return redirect("/")
 
-@app.route('/leaderboard', methods=['GET', 'POST']) # THIS NEEDS THE CURRENT STUDENTS IN THE ROOM TO BE ORDERED, AND NEEDS TO UPDATE PERIODICALLY 
+@app.route('/leaderboard', methods=['GET', 'POST'])  
 def leaderboard():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["username"], "create_class")):
+        if(access.grant_access(session["username"], "leaderboard")):
             username = session["username"]
             class_id = session["class_id"]
             return render_template('leaderboard.html', username=username, class_id=class_id)
@@ -460,14 +471,14 @@ def leaderboard():
     else:
         return redirect("/")
     
-@app.route('/results', methods=['GET', 'POST']) # THIS NEEDS 
+@app.route('/results', methods=['GET', 'POST'])
 def results():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["username"], "create_class")):
+        if(access.grant_access(session["username"], "results")):
             username = session["username"]
             class_id = session["class_id"]
             leaderboard = []
-            students = Task.students_in_class(class_id)
+            students = Task.temp_students(class_id)
             for student in students:
                 leaderboard.append({
                     "name": student.name,
@@ -511,19 +522,6 @@ def download_pdf():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ###################################################################################################################
 # Student Pages
 ###################################################################################################################
@@ -560,7 +558,7 @@ def join_class():
     
     if user_type == "t":
         leaderboard = []
-        students = Task.students_in_class(class_id)
+        students = Task.temp_students(class_id)
         for student in students:
             leaderboard.append({
                 "name": student.name,
@@ -588,7 +586,7 @@ def disconnect():
         if len(rooms[class_id]) == 0:
             del rooms[class_id]
 
-@app.route('/student_homepage', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/student_homepage', methods=['GET', 'POST']) 
 def student_homepage():
     if session.get("logged_in") == True:
         if(access.grant_access(session["user_id"], "student_homepage")):
@@ -600,7 +598,7 @@ def student_homepage():
     else:
         return redirect("/")
     
-@app.route('/tutorial', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/tutorial', methods=['GET', 'POST']) 
 def tutorial():
     if not("message1" in session):
         message1 = ""
@@ -613,7 +611,7 @@ def tutorial():
     print("they are redirected correctly!!")
     print("\n\nLogged in:", session.get("logged_in"))
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "tutorial")):
             username = session["name"]
             class_id = session["class_id"]
             return render_template('tutorial.html', username=username, class_id=class_id, message1=message1)
@@ -622,10 +620,10 @@ def tutorial():
     else:
         return redirect("/")
 
-@app.route('/challenge_page', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/challenge_page', methods=['GET', 'POST']) 
 def challenge_page():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_page")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -638,10 +636,10 @@ def challenge_page():
     else:
         return redirect("/")
 
-@app.route('/tutorial_flag', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/tutorial_flag', methods=['GET', 'POST']) 
 def tutorial_flag():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "tutorial_flag")):
             session["message1"] = "We'll tell you if you're right..."
             return redirect("/tutorial")
         else:
@@ -649,7 +647,7 @@ def tutorial_flag():
     else:
         return redirect("/")
 
-@app.route('/practice', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/practice', methods=['GET', 'POST']) 
 def practice():
     if not("message1" in session):
         message1 = ""
@@ -658,7 +656,7 @@ def practice():
     if "message1" in session:
         session.pop("message1")
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "practice")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -673,7 +671,7 @@ def practice():
     else:
         return redirect("/")
 
-@app.route('/challenge_1', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/challenge_1', methods=['GET', 'POST']) 
 def challenge_1():
     if not("message" in session):
         message = ""
@@ -688,7 +686,7 @@ def challenge_1():
     if "message1" in session:
         session.pop("message1")
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_1")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -703,7 +701,7 @@ def challenge_1():
     else:
         return redirect("/")
 
-@app.route('/challenge_2', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/challenge_2', methods=['GET', 'POST']) 
 def challenge_2():
     if not("message1" in session):
         message1 = ""
@@ -712,7 +710,7 @@ def challenge_2():
     if "message1" in session:
         session.pop("message1")
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_2")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -727,7 +725,7 @@ def challenge_2():
     else:
         return redirect("/")
 
-@app.route('/challenge_3', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/challenge_3', methods=['GET', 'POST']) 
 def challenge_3():
     if not("message1" in session):
         message1 = ""
@@ -736,7 +734,7 @@ def challenge_3():
     if "message1" in session:
         session.pop("message1")
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_3")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -751,7 +749,7 @@ def challenge_3():
     else:
         return redirect("/")
 
-@app.route('/challenge_4', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/challenge_4', methods=['GET', 'POST']) 
 def challenge_4():
     if not("message" in session):
         message = ""
@@ -766,7 +764,7 @@ def challenge_4():
     if "message1" in session:
         session.pop("message1")
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_4")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -781,7 +779,7 @@ def challenge_4():
     else:
         return redirect("/")
 
-@app.route('/challenge_5', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/challenge_5', methods=['GET', 'POST']) 
 def challenge_5():
     if not("message1" in session):
         message1 = ""
@@ -790,7 +788,7 @@ def challenge_5():
     if "message1" in session:
         session.pop("message1")
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_5")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -805,10 +803,10 @@ def challenge_5():
     else:
         return redirect("/")
 
-@app.route('/flag_0', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/flag_0', methods=['GET', 'POST']) 
 def flag_0():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "flag_0")):
             flag_input = request.form.get('flag')
             flag = Task.get_flag("practice")
             if flag_input.lower() == flag:
@@ -821,7 +819,7 @@ def flag_0():
                 class_id = session["class_id"]
 
                 leaderboard = []
-                students = Task.students_in_class(class_id)
+                students = Task.temp_students(class_id)
                 for student in students:
                     leaderboard.append({
                         "name": student.name,
@@ -832,17 +830,17 @@ def flag_0():
 
                 return redirect("/completed")
             else:
-                session["message1"] = "Thats not quite right..."
+                session["message1"] = "that's not quite right..."
             return redirect("/practice")
         else:
             return redirect("/")
     else:
         return redirect("/")
 
-@app.route('/flag_1', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/flag_1', methods=['GET', 'POST']) 
 def flag_1():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "flag_1")):
             flag_input = request.form.get('flag')
             flag = Task.get_flag("challenge_1")
             if flag_input.lower() == flag:
@@ -855,7 +853,7 @@ def flag_1():
                 class_id = session["class_id"]
 
                 leaderboard = []
-                students = Task.students_in_class(class_id)
+                students = Task.temp_students(class_id)
                 for student in students:
                     leaderboard.append({
                         "name": student.name,
@@ -866,17 +864,17 @@ def flag_1():
 
                 return redirect("/completed")
             else:
-                session["message1"] = "Thats not quite right..."
+                session["message1"] = "that's not quite right..."
             return redirect("/challenge_1")
         else:
             return redirect("/")
     else:
         return redirect("/")
     
-@app.route('/flag_2', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/flag_2', methods=['GET', 'POST']) 
 def flag_2():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "flag_2")):
             flag_input = request.form.get('flag')
             flag = Task.get_flag("challenge_2")
             if flag_input.lower() == flag:
@@ -889,7 +887,7 @@ def flag_2():
                 class_id = session["class_id"]
 
                 leaderboard = []
-                students = Task.students_in_class(class_id)
+                students = Task.temp_students(class_id)
                 for student in students:
                     leaderboard.append({
                         "name": student.name,
@@ -900,17 +898,17 @@ def flag_2():
 
                 return redirect("/completed")
             else:
-                session["message1"] = "Thats not quite right..."
+                session["message1"] = "that's not quite right..."
             return redirect("/challenge_2")
         else:
             return redirect("/")
     else:
         return redirect("/")
 
-@app.route('/flag_3', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/flag_3', methods=['GET', 'POST']) 
 def flag_3():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "flag_3")):
             flag_input = request.form.get('flag')
             flag = Task.get_flag("challenge_3")
             if flag_input.lower() == flag:
@@ -923,7 +921,7 @@ def flag_3():
                 class_id = session["class_id"]
 
                 leaderboard = []
-                students = Task.students_in_class(class_id)
+                students = Task.temp_students(class_id)
                 for student in students:
                     leaderboard.append({
                         "name": student.name,
@@ -934,17 +932,17 @@ def flag_3():
 
                 return redirect("/completed")
             else:
-                session["message1"] = "Thats not quite right..."
+                session["message1"] = "that's not quite right..."
             return redirect("/challenge_3")
         else:
             return redirect("/")
     else:
         return redirect("/")
 
-@app.route('/flag_4', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/flag_4', methods=['GET', 'POST']) 
 def flag_4():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "flag_4")):
             flag_input = request.form.get('flag')
             flag = Task.get_flag("challenge_4")
             if flag_input.lower() == flag:
@@ -957,7 +955,7 @@ def flag_4():
                 class_id = session["class_id"]
 
                 leaderboard = []
-                students = Task.students_in_class(class_id)
+                students = Task.temp_students(class_id)
                 for student in students:
                     leaderboard.append({
                         "name": student.name,
@@ -968,17 +966,17 @@ def flag_4():
 
                 return redirect("/completed")
             else:
-                session["message1"] = "Thats not quite right..."
+                session["message1"] = "that's not quite right..."
             return redirect("/challenge_4")
         else:
             return redirect("/")
     else:
         return redirect("/")
 
-@app.route('/flag_5', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/flag_5', methods=['GET', 'POST']) 
 def flag_5():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "flag_5")):
             flag_input = request.form.get('flag')
             flag = Task.get_flag("challenge_5")
             if flag_input.lower() == flag:
@@ -991,7 +989,7 @@ def flag_5():
                 class_id = session["class_id"]
 
                 leaderboard = []
-                students = Task.students_in_class(class_id)
+                students = Task.temp_students(class_id)
                 for student in students:
                     leaderboard.append({
                         "name": student.name,
@@ -1002,17 +1000,17 @@ def flag_5():
 
                 return redirect("/completed")
             else:
-                session["message1"] = "Thats not quite right..."
+                session["message1"] = "that's not quite right..."
             return redirect("/challenge_5")
         else:
             return redirect("/")
     else:
         return redirect("/")
 
-@app.route('/login_challenge_1', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/login_challenge_1', methods=['GET', 'POST']) 
 def login_challenge_1():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_1")):
             password = request.form.get('password')
             if password.lower() == "secret":
                 session["message"] = "Password correct!"
@@ -1024,10 +1022,10 @@ def login_challenge_1():
     else:
         return redirect("/")
     
-@app.route('/login_challenge_4', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/login_challenge_4', methods=['GET', 'POST']) 
 def login_challenge_4():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_4")):
             password = request.form.get('password')
             if password.lower() == "stella2007":
                 session["message"] = "Password correct!"
@@ -1039,10 +1037,10 @@ def login_challenge_4():
     else:
         return redirect("/")
 
-@app.route('/packet_1', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/packet_1', methods=['GET', 'POST']) 
 def packet_1():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_5")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1054,10 +1052,10 @@ def packet_1():
     else:
         return redirect("/")
 
-@app.route('/packet_2', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/packet_2', methods=['GET', 'POST']) 
 def packet_2():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_5")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1069,10 +1067,10 @@ def packet_2():
     else:
         return redirect("/")
     
-@app.route('/packet_3', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/packet_3', methods=['GET', 'POST']) 
 def packet_3():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_5")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1084,10 +1082,10 @@ def packet_3():
     else:
         return redirect("/")
     
-@app.route('/packet_4', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/packet_4', methods=['GET', 'POST']) 
 def packet_4():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_5")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1099,10 +1097,10 @@ def packet_4():
     else:
         return redirect("/")
     
-@app.route('/packet_5', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/packet_5', methods=['GET', 'POST']) 
 def packet_5():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_5")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1114,10 +1112,10 @@ def packet_5():
     else:
         return redirect("/")
 
-@app.route('/packet_6', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/packet_6', methods=['GET', 'POST']) 
 def packet_6():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_5")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1129,10 +1127,10 @@ def packet_6():
     else:
         return redirect("/")
 
-@app.route('/images', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/images', methods=['GET', 'POST']) 
 def images():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_3")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1144,10 +1142,10 @@ def images():
     else:
         return redirect("/")
     
-@app.route('/meetings', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/meetings', methods=['GET', 'POST']) 
 def meetings():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_3")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1159,10 +1157,10 @@ def meetings():
     else:
         return redirect("/")
 
-@app.route('/research', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/research', methods=['GET', 'POST']) 
 def research():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_3")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1174,10 +1172,10 @@ def research():
     else:
         return redirect("/")
 
-@app.route('/work', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/work', methods=['GET', 'POST']) 
 def work():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_3")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1189,10 +1187,10 @@ def work():
     else:
         return redirect("/")
 
-@app.route('/geese', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/geese', methods=['GET', 'POST']) 
 def geese():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_3")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1204,10 +1202,10 @@ def geese():
     else:
         return redirect("/")
 
-@app.route('/goose', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/goose', methods=['GET', 'POST']) 
 def goose():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_3")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1219,10 +1217,10 @@ def goose():
     else:
         return redirect("/")
 
-@app.route('/hat_goose', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/hat_goose', methods=['GET', 'POST']) 
 def hat_goose():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_3")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1234,10 +1232,10 @@ def hat_goose():
     else:
         return redirect("/")
 
-@app.route('/shoes_goose', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/shoes_goose', methods=['GET', 'POST']) 
 def shoes_goose():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_3")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1249,10 +1247,10 @@ def shoes_goose():
     else:
         return redirect("/")
 
-@app.route('/meeting_1', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/meeting_1', methods=['GET', 'POST']) 
 def meeting_1():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_3")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1264,10 +1262,10 @@ def meeting_1():
     else:
         return redirect("/")
 
-@app.route('/meeting_2', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/meeting_2', methods=['GET', 'POST']) 
 def meeting_2():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_3")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1279,10 +1277,10 @@ def meeting_2():
     else:
         return redirect("/")
 
-@app.route('/meeting_3', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/meeting_3', methods=['GET', 'POST']) 
 def meeting_3():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_3")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1294,10 +1292,10 @@ def meeting_3():
     else:
         return redirect("/")
 
-@app.route('/notes', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/notes', methods=['GET', 'POST']) 
 def notes():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_3")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1309,10 +1307,10 @@ def notes():
     else:
         return redirect("/")
     
-@app.route('/password', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/password', methods=['GET', 'POST']) 
 def password():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_3")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1324,10 +1322,10 @@ def password():
     else:
         return redirect("/")
 
-@app.route('/cyber', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/cyber', methods=['GET', 'POST']) 
 def cyber():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_3")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1339,10 +1337,10 @@ def cyber():
     else:
         return redirect("/")
 
-@app.route('/goose_txt', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/goose_txt', methods=['GET', 'POST']) 
 def goose_txt():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_3")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1354,10 +1352,10 @@ def goose_txt():
     else:
         return redirect("/")
     
-@app.route('/security', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/security', methods=['GET', 'POST']) 
 def security():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_3")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1369,10 +1367,10 @@ def security():
     else:
         return redirect("/")
 
-@app.route('/cyber_quack', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/cyber_quack', methods=['GET', 'POST']) 
 def cyber_quack():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_3")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1384,10 +1382,10 @@ def cyber_quack():
     else:
         return redirect("/")
 
-@app.route('/file_guide', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/file_guide', methods=['GET', 'POST']) 
 def file_guide():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "challenge_3")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1399,10 +1397,10 @@ def file_guide():
     else:
         return redirect("/")
 
-@app.route('/completed', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/completed', methods=['GET', 'POST']) 
 def completed():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "completed")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1414,21 +1412,10 @@ def completed():
     else:
         return redirect("/")
 
-
-
-
-
-
-
-
-
-
-
-
-@app.route('/student_results', methods=['GET', 'POST']) # unfinished!!!
+@app.route('/student_results', methods=['GET', 'POST']) 
 def student_results():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "student_homepage")):
+        if(access.grant_access(session["user_id"], "student_results")):
             username = session["name"]
             class_id = session["class_id"]
             user_id = session["user_id"]
@@ -1439,21 +1426,6 @@ def student_results():
             return redirect("/")
     else:
         return redirect("/")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @app.route('/logout', methods=['POST']) 
 def logout():
@@ -1469,7 +1441,7 @@ def logout():
 @app.route('/logout_student', methods=['POST']) 
 def logout_student():
     if session.get("logged_in") == True:
-        if(access.grant_access(session["user_id"], "logout")):
+        if(access.grant_access(session["user_id"], "logout_student")):
             session["logged_in"] = False
             return redirect("/")
         else:

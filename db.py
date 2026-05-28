@@ -12,16 +12,12 @@ import os
 from password_generator import PasswordGenerator
 from time import sleep
 from threading import Thread
-from flask import Flask, send_file
 from reportlab.pdfgen import canvas
 from io import BytesIO
-
 
 f = open("db_key", "r")
 key = f.readline()
 f.close()
-
-#FIGURE OUT HOW TO DO THIS!!!!
 
 def load_id_count(table):
     f = open("{0}_id_counter".format(table), "r")
@@ -94,7 +90,6 @@ class db:
             self.salt = salt
             self.class_id = class_id
             self.score = "0"
-            self.in_game = False
             self.user_type = "s"
             self.password_plaintext = password_plaintext
 
@@ -106,7 +101,6 @@ class db:
         salt = Column("Salt", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
         class_id = Column("Class ID", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
         score = Column("Score", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
-        in_game = Column("In Game", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
         user_type = Column("User Type", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
         password_plaintext = Column("Plaintext Password", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
 
@@ -128,16 +122,12 @@ class db:
             save_val("Classes")
             self.teacher_id = teacher_id
             self.class_name = class_name
-            self.current_game = False
-            self.game_started = False
 
         __tablename__ = "Classes"
 
         class_id = Column("Class ID", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'), primary_key = True)
         teacher_id = Column("Teacher ID",StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
         class_name = Column("Class Name", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
-        current_game = Column("Current Game", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
-        game_started = Column("Game Started", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Challenge
@@ -158,49 +148,6 @@ class db:
         name = Column("Name",StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
         points = Column("Points", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
         flag = Column("Flag", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Leaderboard
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    class Leaderboards(Base): 
-        id_counter = count(start = load_id_count("Leaderboards"), step = 1)
-        def __init__(self, class_id, ordered_students):
-            self.leaderboard_id = str(next(self.id_counter))
-            save_val("Leaderboards") 
-            self.class_id = class_id
-            self.ordered_students = ordered_students
-
-        def order_students():
-            print("order students")
-        
-        __tablename__ = "Leaderboards"   
-
-        leaderboard_id = Column("User Order ID", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'), primary_key = True)
-        class_id = Column("Class ID",StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
-        ordered_students = Column("Ordered students", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Game
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    class Games(Base): 
-        id_counter = count(start = load_id_count("Games"), step = 1)
-        def __init__(self, current_players, class_id):
-            self.game_id = str(next(self.id_counter))
-            save_val("Games")
-            self.current_players = current_players 
-            self.class_id = class_id
-
-        
-        def start_game():
-            print("Start game")
-
-        __tablename__ = "Purchase History"
-
-        game_id = Column("Game ID", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'), primary_key = True)
-        current_players = Column("Current Players", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
-        class_id = Column("Class ID", StringEncryptedType(String(100), key, AesEngine, 'pkcs5'))
 
 ###################################################################################################################
 # Creation
@@ -257,7 +204,7 @@ class Task:
                 return(user)
             except NoResultFound as e:
                 return(0)
-            
+
     # Checks if class name is available and returns True if it is 
     def class_name_available(teacher_id, class_name):
         classes_temp = session.query(db.Classes).filter(db.Classes.teacher_id==teacher_id).all()
@@ -285,6 +232,7 @@ class Task:
             return(req[1]) # Password doesnt meet requirements
         return(2) # User already exists
     
+    # Adds a new class 
     def add_class(class_name, username):
         teacher = session.query(db.Teachers).filter(db.Teachers.username==username).one() # Identifies current user
         teacher_id = teacher.getId()
@@ -297,10 +245,12 @@ class Task:
             return((True, new_class.class_id)) # Success
         return((False, "You have already created a class with that name")) # Class already exists
     
+    # Starts a thread to generate students for a class, so that the teacher does not have to wait to continue
     def generate_class(class_size, class_id):
         thr = Thread(target=Task.generate_students, args=[class_size, class_id])
         thr.start()
 
+    # Generates students with usernames and random passwords
     def generate_students(class_size, class_id):
         file = open("usernames.txt")
         contents = file.read()
@@ -316,6 +266,7 @@ class Task:
             session.commit()
             print(new_student.user_id, new_student.name, new_student.class_id, new_student.password, new_student.score, new_student.user_type)
 
+    # Generates a student password which meets minimum requirements for security
     def generate_password():
         pwo = PasswordGenerator()
         pwo.minlen = 8 
@@ -329,14 +280,12 @@ class Task:
         print(password)
         return password
 
+    # Returns the students in a given class
     def temp_students(class_id):
         temp_students = session.query(db.Students).filter(db.Students.class_id==class_id).all()
         return temp_students
 
-    # def add_named_students(name, class_id, temp_class):
-    #     thr = Thread(target=Task.add_named_students_thread, args=[name, class_id, temp_class])
-    #     thr.start()
-
+    # Adds a student with the given name to the given class
     def add_named_students(name, class_id, temp_class):
         for student in temp_class:
             if student.name == name:
@@ -351,6 +300,7 @@ class Task:
         print(new_student.user_id, new_student.name, new_student.class_id, new_student.password, new_student.score, new_student.user_type)
         return ((True, "woo"))
     
+    # Deletes given student from their class
     def delete_student(name, temp_class):
         for student in temp_class:
             if student.name == name:
@@ -359,6 +309,7 @@ class Task:
                 return ((True), "yip")
         return((False), "An error occured.")
  
+    # Returns the classes for a given teacher
     def get_classes(username):
         teacher = session.query(db.Teachers).filter(db.Teachers.username==username).one()
         teacher_id = teacher.user_id
@@ -371,31 +322,31 @@ class Task:
         print(temp_classes)
         return temp_classes
     
+    # Deletes given class 
     def delete_class(class_id):
         this_class = session.query(db.Classes).filter(db.Classes.class_id==class_id).one()
         session.delete(this_class)
         session.commit()
 
+    # Updates the score for a given user based on the completed challenge
     def update_score(user, challenge_name):
         challenge = session.query(db.Challenges).filter(db.Challenges.name==challenge_name).one()
         points = challenge.points
         user.update_student_score(points)
 
+    # Returns the flag for a given challenge
     def get_flag(challenge_name):
         challenge = session.query(db.Challenges).filter(db.Challenges.name==challenge_name).one()
         flag = challenge.flag
         return flag
-                                                    
-    def students_in_class(class_id):
-        students = session.query(db.Students).filter(db.Students.class_id==class_id).all()
-        return students
         
+    # Generates a pdf containing the students in a class and their login details, to be downloaded by the teacher
     def make_pdf(class_id):
         buffer = BytesIO()
         pdf = canvas.Canvas(buffer)
         y = 800
         pdf.setFont("Helvetica", 13)
-        students = Task.students_in_class(class_id)
+        students = Task.temp_students(class_id)
         for student in students:
             line = (
                 f"Student: {student.name}  |  "
@@ -415,21 +366,6 @@ class Task:
         pdf.save()
         buffer.seek(0)
         return buffer
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     # Checks user does not already exist and adds them to the system 
     def add_student(username, password, class_id):
