@@ -1,18 +1,49 @@
+# SQLAlchemy Core: https://docs.sqlalchemy.org/
 from sqlalchemy import create_engine, Column, String
+
+# SQLAlchemy ORM: https://docs.sqlalchemy.org/en/20/orm/
 from sqlalchemy.orm import sessionmaker, declarative_base 
+
+# SQLAlchemy ORM Exceptions: https://docs.sqlalchemy.org/en/20/orm/exceptions.html
 from sqlalchemy.orm.exc import NoResultFound
+
+# Python Standard Library - itertools: https://docs.python.org/3/library/itertools.html
 from itertools import count
+
+# Python Standard Library - hashlib: https://docs.python.org/3/library/hashlib.html
 import hashlib
+
+# bcrypt library: https://pypi.org/project/bcrypt/
 import bcrypt
+
+# Python Standard Library - random: https://docs.python.org/3/library/random.html
 from random import randint
+
+# SQLAlchemy-Utils: https://sqlalchemy-utils.readthedocs.io/
 from sqlalchemy_utils import StringEncryptedType
+
+# SQLAlchemy-Utils Encryption: https://sqlalchemy-utils.readthedocs.io/
 from sqlalchemy_utils.types.encrypted.encrypted_type import AesEngine
+
+# Python Standard Library - time: https://docs.python.org/3/library/time.html
 import time
+
+# Python Standard Library - os: https://docs.python.org/3/library/os.html
 import os
+
+# password-generator package: https://pypi.org/project/password-generator/
 from password_generator import PasswordGenerator
+
+# Python Standard Library - time.sleep: https://docs.python.org/3/library/time.html#time.sleep
 from time import sleep
+
+# Python Standard Library - threading: https://docs.python.org/3/library/threading.html
 from threading import Thread
+
+# ReportLab PDF Generation: https://www.reportlab.com/docs/reportlab-userguide.pdf
 from reportlab.pdfgen import canvas
+
+# Python Standard Library - io: https://docs.python.org/3/library/io.html
 from io import BytesIO
 
 f = open("db_key", "r")

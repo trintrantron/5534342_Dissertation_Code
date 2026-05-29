@@ -1,8 +1,15 @@
+# Flask web framework: https://flask.palletsprojects.com/
 from flask import Flask, render_template, request, redirect, url_for, session, send_file
+
+# Flask-SocketIO: https://flask-socketio.readthedocs.io/
 from flask_socketio import SocketIO, emit, join_room
+
 from db import Task
+
+# Python Standard Library - logging: https://docs.python.org/3/library/logging.html
 import logging
 
+# Python Standard Library - logging handlers: https://docs.python.org/3/library/logging.handlers.html
 from logging.handlers import RotatingFileHandler
 
 app = Flask(__name__)
